@@ -6,10 +6,9 @@ British Standard Pipe Thread is based on a triangular profile. The angle between
 is 55 deg (symmetrical). We use the following nomenclature:
 
 - crest: The "summit" of a thread
-- groove: The lowest point in the valley of a thread
-- rcrest, rgroove: Radii of crest and groove, respectively
-- t = abs(rcrest - rgroove)
-- rpitch = mean of rmajor and rminor
+- valley: The lowest point in the valley of a thread
+- rcrest, rvalley: Radii of crest and groove, respectively
+- rpitch = the mean radius of the original triangular profile
 
 The crest and groove are both truncated by t/6. The radii at these flats are called
 rmajor and rminor.
@@ -32,43 +31,50 @@ use <thread_profile.scad>
 
 phi = 55;
 
-module BSPP_external_thread(pitch=2.309, turns=3, dminor=30.291, higbee_arc=45, fn=120)
+module BSPP_external_thread(pitch=2.309, turns=3, dpitch=31.68, higbee_arc=45, fn=120)
 {
-    t = pitch / (2 * tan(phi/2));
-    rgroove = dminor / 2 - t / 6;
-    rcrest = rgroove + t;
-    section_profile = [[0, -pitch / 2], [0, pitch / 2], [+t, 0]];
-    rmajor = rcrest - t / 6;
-    intersection() {
+    rpitchp = dpitch / 2;
+    P = pitch;
+
+    rcrest = rpitchp + 0.21706 * P;
+    rvalley = rpitchp - 0.42021 * P;
+    zvalley = 0.03125 * P;
+    zcrest = 0.13701 * P;
+    
+    section_profile = [[0, -P / 2 + zvalley], [0, +P / 2 - zvalley],
+                       [rcrest - rvalley, +zcrest],
+                       [rcrest - rvalley, -zcrest]];
+
+    straight_thread(
+        section_profile=section_profile,
+        higbee_arc=higbee_arc,
+        r=rvalley,
+        turns=turns,
+        pitch=pitch,
+        fn=fn);
+}
+
+module BSPP_internal_thread(pitch=2.309, turns=3, dpitch=31.86, higbee_arc=45, fn=120)
+{
+    rpitchp = dpitch / 2;
+    P = pitch;
+    
+    rcrest = rpitchp - 0.19813 * P;
+    rvalley = rpitchp + 0.42021 * P;
+    zvalley = 0.03125 * P;
+    zcrest = 0.13701 * P;
+    
+    section_profile = [[0, P / 2 - zvalley], [0, -P / 2 + zvalley],
+                       [rcrest - rvalley, -zcrest], [rcrest - rvalley, +zcrest]];
+
+    rotate(180) // rotate by half a turn to fit external thread
         straight_thread(
             section_profile=section_profile,
             higbee_arc=higbee_arc,
-            r=rgroove,
+            r=rvalley,
             turns=turns,
             pitch=pitch,
             fn=fn);
-        cylinder(h=turns * pitch, r=rmajor, $fn=fn);
-    };
-}
-
-module BSPP_internal_thread(pitch=2.309, turns=3, dmajor=33.249, higbee_arc=45, fn=120)
-{
-    t = pitch / (2 * tan(phi/2));
-    rgroove = dmajor / 2 + t / 6;
-    rcrest = rgroove - t;
-    section_profile = [[0, +pitch / 2], [0, -pitch / 2], [-t, 0]];
-    rminor = rcrest + t / 6;
-    difference() {
-        rotate(180) // rotate by half a turn to fit external thread
-            straight_thread(
-                section_profile=section_profile,
-                higbee_arc=higbee_arc,
-                r=rgroove,
-                turns=turns,
-                pitch=pitch,
-                fn=fn);
-        cylinder(h=turns * pitch, r=rminor, $fn=fn);
-    };
 }
 
 // testing:
@@ -78,9 +84,17 @@ intersection() {
         translate([-50, 0, -50])
             cube(100, 100, 100);
                 union() {
-                    BSPP_external_thread(pitch=2.309, turns=3, dminor=30.291,
-                                          higbee_arc=45, fn=120);
-                    BSPP_internal_thread(pitch=2.309, turns=3, dmajor=33.249,
-                                         higbee_arc=45, fn=120);
+                    BSPP_external_thread(pitch=2.309, turns=3, dpitch=31.68,
+                                          higbee_arc=20, fn=120);
+                    translate([0, 0, -1.2])
+                        cylinder(h=9, r=31.68/2 - 0.40020 * 2.309);
+                    BSPP_internal_thread(pitch=2.309, turns=3, dpitch=31.86,
+                                         higbee_arc=20, fn=120);
+                    translate([0, 0, -0.9])
+                        difference() {
+                            cylinder(h=9, r=20, $fn=120);
+                            translate([0, 0, -0.1])
+                                cylinder(h=10, r=31.86/2 + 0.40020 * 2.309, $fn=120);
+                        };
                 };
 };
