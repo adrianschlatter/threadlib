@@ -29,7 +29,6 @@ in practice!
 
 use <thread_profile.scad>
 
-phi = 55;
 
 module BSPP_external_thread(pitch=2.309, turns=3, dpitch=31.68, higbee_arc=45, fn=120)
 {
@@ -41,14 +40,14 @@ module BSPP_external_thread(pitch=2.309, turns=3, dpitch=31.68, higbee_arc=45, f
     zvalley = 0.03125 * P;
     zcrest = 0.13701 * P;
     
-    section_profile = [[0, -P / 2 + zvalley], [0, +P / 2 - zvalley],
-                       [rcrest - rvalley, +zcrest],
-                       [rcrest - rvalley, -zcrest]];
+    section_profile = [[rvalley, -P / 2 + zvalley], [rvalley, +P / 2 - zvalley],
+                       [rcrest, +zcrest],
+                       [rcrest, -zcrest]];
 
     straight_thread(
         section_profile=section_profile,
         higbee_arc=higbee_arc,
-        r=rvalley,
+        r=0,
         turns=turns,
         pitch=pitch,
         fn=fn);
@@ -64,14 +63,14 @@ module BSPP_internal_thread(pitch=2.309, turns=3, dpitch=31.86, higbee_arc=45, f
     zvalley = 0.03125 * P;
     zcrest = 0.13701 * P;
     
-    section_profile = [[0, P / 2 - zvalley], [0, -P / 2 + zvalley],
-                       [rcrest - rvalley, -zcrest], [rcrest - rvalley, +zcrest]];
+    section_profile = [[rvalley, P / 2 - zvalley], [rvalley, -P / 2 + zvalley],
+                       [rcrest, -zcrest], [rcrest, +zcrest]];
 
     rotate(180) // rotate by half a turn to fit external thread
         straight_thread(
             section_profile=section_profile,
             higbee_arc=higbee_arc,
-            r=rvalley,
+            r=0,
             turns=turns,
             pitch=pitch,
             fn=fn);
