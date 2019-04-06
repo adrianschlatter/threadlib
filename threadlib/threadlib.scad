@@ -41,7 +41,6 @@ module thread(designator, turns, higbee_arc=45, fn=120)
 {
     specs = thread_specs(designator);
     P = specs[0]; Rrotation = specs[1]; section_profile = specs[3];
-    echo(designator, "Rrotation", Rrotation);
     straight_thread(
         section_profile=section_profile,
         higbee_arc=higbee_arc,
@@ -49,28 +48,3 @@ module thread(designator, turns, higbee_arc=45, fn=120)
         turns=turns,
         pitch=P);
 }
-
-
-// testing:
-
-type = "G1";
-intersection() {
-    color("Green")
-        translate([-100, 0, -100])
-            cube(200, 200, 200);
-                union() {
-                    echo("Dsupport", thread_specs(str(type, "-ext"))[2]);
-                    thread(str(type, "-ext"), turns=3, higbee_arc=20, fn=120);
-                    translate([0, 0, -1.2])
-                        cylinder(h=9, d=thread_specs(str(type, "-ext"))[2], $fn=120);
-
-                    rotate(180)
-                        thread(str(type, "-int"), turns=3, higbee_arc=20, fn=120);
-                    translate([0, 0, -0.9])
-                        difference() {
-                            cylinder(h=9, r=200, $fn=120);
-                            translate([0, 0, -0.1])
-                                cylinder(h=10, d=thread_specs(str(type, "-int"))[2], $fn=120);
-                        };
-                };
-};
