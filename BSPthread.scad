@@ -28,72 +28,49 @@ in practice!
 */
 
 use <thread_profile.scad>
+include <THREAD_TABLE.scad>
 
+function thread_specs(designator) =
+    /* Returns thread specs of thread-type 'designator' as a vector of
+       [pitch, Rrotation, Dsupport, section_profile] */
+       
+    THREAD_TABLE[search([designator], THREAD_TABLE, num_returns_per_match=1,
+                   index_col_num=0)[0]][1];
 
-module BSPP_external_thread(pitch=2.309, turns=3, dpitch=31.68, higbee_arc=45, fn=120)
+module thread(designator, turns, higbee_arc=45, fn=120)
 {
-    rpitchp = dpitch / 2;
-    P = pitch;
-
-    rcrest = rpitchp + 0.21706 * P;
-    rvalley = rpitchp - 0.42021 * P;
-    zvalley = 0.03125 * P;
-    zcrest = 0.13701 * P;
-    
-    section_profile = [[rvalley, -P / 2 + zvalley], [rvalley, +P / 2 - zvalley],
-                       [rcrest, +zcrest],
-                       [rcrest, -zcrest]];
-
+    specs = thread_specs(designator);
+    P = specs[0]; Rrotation = specs[1]; section_profile = specs[3];
+    echo(designator, "Rrotation", Rrotation);
     straight_thread(
         section_profile=section_profile,
         higbee_arc=higbee_arc,
-        r=0,
+        r=Rrotation,
         turns=turns,
-        pitch=pitch,
-        fn=fn);
+        pitch=P);
 }
 
-module BSPP_internal_thread(pitch=2.309, turns=3, dpitch=31.86, higbee_arc=45, fn=120)
-{
-    rpitchp = dpitch / 2;
-    P = pitch;
-    
-    rcrest = rpitchp - 0.19813 * P;
-    rvalley = rpitchp + 0.42021 * P;
-    zvalley = 0.03125 * P;
-    zcrest = 0.13701 * P;
-    
-    section_profile = [[rvalley, P / 2 - zvalley], [rvalley, -P / 2 + zvalley],
-                       [rcrest, -zcrest], [rcrest, +zcrest]];
-
-    rotate(180) // rotate by half a turn to fit external thread
-        straight_thread(
-            section_profile=section_profile,
-            higbee_arc=higbee_arc,
-            r=0,
-            turns=turns,
-            pitch=pitch,
-            fn=fn);
-}
 
 // testing:
 
+type = "G1";
 intersection() {
     color("Green")
-        translate([-50, 0, -50])
-            cube(100, 100, 100);
+        translate([-100, 0, -100])
+            cube(200, 200, 200);
                 union() {
-                    BSPP_external_thread(pitch=2.309, turns=3, dpitch=31.68,
-                                          higbee_arc=20, fn=120);
+                    echo("Dsupport", thread_specs(str(type, "-ext"))[2]);
+                    thread(str(type, "-ext"), turns=3, higbee_arc=20, fn=120);
                     translate([0, 0, -1.2])
-                        cylinder(h=9, r=31.68/2 - 0.40020 * 2.309);
-                    BSPP_internal_thread(pitch=2.309, turns=3, dpitch=31.86,
-                                         higbee_arc=20, fn=120);
+                        cylinder(h=9, d=thread_specs(str(type, "-ext"))[2], $fn=120);
+
+                    rotate(180)
+                        thread(str(type, "-int"), turns=3, higbee_arc=20, fn=120);
                     translate([0, 0, -0.9])
                         difference() {
-                            cylinder(h=9, r=20, $fn=120);
+                            cylinder(h=9, r=200, $fn=120);
                             translate([0, 0, -0.1])
-                                cylinder(h=10, r=31.86/2 + 0.40020 * 2.309, $fn=120);
+                                cylinder(h=10, d=thread_specs(str(type, "-int"))[2], $fn=120);
                         };
                 };
 };
