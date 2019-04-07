@@ -1,45 +1,27 @@
 /*
-Britisch Standard Pipe Thread
-++++++++++++++++++++++++++++++
+threadlib
++++++++++
 
-British Standard Pipe Thread is based on a triangular profile. The angle between flanks
-is 55 deg (symmetrical). We use the following nomenclature:
+Create threads easily.
 
-- crest: The "summit" of a thread
-- valley: The lowest point in the valley of a thread
-- rcrest, rvalley: Radii of crest and groove, respectively
-- rpitch = the mean radius of the original triangular profile
-
-The crest and groove are both truncated by t/6. The radii at these flats are called
-rmajor and rminor.
-
-Note 1:
-
-The specification requires that the flats are smoothed by circles that tangentially
-match the flanks. We use a simpler version here: We create a triangular profile
-and truncate the crests but not the grooves.
-
-Note 2:
-
-The specification requires allowances. This module creates threads with the ideal
-rpitch for both external and internal threads (i.e., they just touch each other).
-This is exactly at the edges of the given allowances and will not reliably work
-in practice!
+:Author: Adrian Schlatter
+:Date: 2019-04-07
+:License: 3-Clause BSD. See LICENSE.
 */
 
 use <thread_profile.scad>
 include <THREAD_TABLE.scad>
 
-function thread_specs(designator) =
+function thread_specs(designator, table=THREAD_TABLE) =
     /* Returns thread specs of thread-type 'designator' as a vector of
        [pitch, Rrotation, Dsupport, section_profile] */
        
-    THREAD_TABLE[search([designator], THREAD_TABLE, num_returns_per_match=1,
+    table[search([designator], table, num_returns_per_match=1,
                    index_col_num=0)[0]][1];
 
-module thread(designator, turns, higbee_arc=45, fn=120)
+module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE)
 {
-    specs = thread_specs(designator);
+    specs = thread_specs(designator, table=table);
     P = specs[0]; Rrotation = specs[1]; section_profile = specs[3];
     straight_thread(
         section_profile=section_profile,
@@ -48,3 +30,31 @@ module thread(designator, turns, higbee_arc=45, fn=120)
         turns=turns,
         pitch=P);
 }
+
+module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+    union() {
+        specs = thread_specs(str(designator, "-ext"), table=table);
+        P = specs[0]; Dsupport = specs[2];
+        H = (turns + 1) * P;
+        thread(str(designator, "-ext"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        translate([0, 0, -P / 2])
+            cylinder(h=H, d=Dsupport, $fn=fn);
+    };
+};
+
+module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+    union() {
+        specs = thread_specs(str(designator, "-int"), table=table);
+        P = specs[0]; Dsupport = specs[2];
+        H = (turns + 1) * P;        
+        rotate(180)
+            thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+
+        translate([0, 0, -P / 2])
+            difference() {
+                cylinder(h=H, d=Douter, $fn=fn);
+                translate([0, 0, -0.1])
+                    cylinder(h=H+0.2, d=Dsupport, $fn=fn);
+            };
+    };
+};
