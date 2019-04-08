@@ -93,3 +93,9 @@ Care to share? Safe others from repeating the valuable work you have already
 accomplished and get the fame you deserve: Send in your tried and tested threads
 for addition to threadlib!
 
+
+Change Log
+===========================
+
+- 0.1: Initial release supporting BSP parallel thread
+
