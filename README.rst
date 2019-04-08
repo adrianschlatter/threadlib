@@ -1,11 +1,17 @@
 threadlib
 +++++++++++++++++++++++++++
 
-threadlib is a library of standard threads for OpenSCAD.
+threadlib is a library of standard threads for OpenSCAD. It is based on Helges
+excellent `threadprofile.scad
+<https://github.com/MisterHW/IoP-satellite/tree/master/OpenSCAD%20bottle%20threads>`__
+to create nice threads with lead-in / lead-out tapers. Check out his `article on
+generating nice threads
+<https://hackaday.io/page/5252-generating-nice-threads-in-openscad>`__ on
+Hackaday.
 
-In contrast to other thread libraries, it does not make you look up diameters
-and pitches and maybe even thread-profiles in tables and norms: It has these
-tables built in.
+In contrast to other thread libraries, threadlib does not make you look up
+diameters and pitches and maybe even thread-profiles in tables and norms: It has
+these tables built in.
 
 Creating a thread is as simple as
 
@@ -56,6 +62,14 @@ nut(...) uses):
 
 Here, we have used the function thread_specs(...) to look up the threads
 specifications - including the recommended diameter of the support structure.
+
+
+List of supported threads
+===========================
+
+Currently, threadlib knows these threads:
+
+- British Standard Pipe Parallel Threadss G1/16 to G6
 
 
 Extensibility
