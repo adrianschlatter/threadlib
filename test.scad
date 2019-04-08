@@ -6,7 +6,9 @@ Test and demonstrate thread library
 :License: 3-Clause BSD. See LICENSE.
 */
 
-use <threadlib.scad>
+use <threadlib/threadlib.scad>
+
+echo ("threadlib version: ", __THREADLIB_VERSION());
 
 type = "G1";
 turns = 5;
