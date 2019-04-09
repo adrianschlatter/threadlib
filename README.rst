@@ -27,17 +27,17 @@ inside the ranges allowed by the norms.
 Usage
 ===========================
 
-To create a bolt (without head) with 10 turns of G1-inch thread:
+To create a bolt (without head) with 10 turns of M12 thread:
 
 .. code-block:: OpenSCAD
 
-        bolt("G1", turns=10);
+        bolt("M12x0.5", turns=10);
 
 A nut:
 
 .. code-block:: OpenSCAD
 
-        nut("G1", turns=10, Douter=40);
+        nut("M12x0.5", turns=10, Douter=40);
 
 Note that for a nut you also have to specify an outer diameter. The inner
 diameter is implicitly given by the thread designator ("G1" in this case).
@@ -69,8 +69,8 @@ List of supported threads
 
 Currently, threadlib knows these threads:
 
-- British Standard Pipe Parallel Threadss G1/16 to G6
-
+- British Standard Pipe Parallel Threads G1/16 to G6
+- Metric threads (coarse, fine, and super-fine pitches) M0.25 to M600
 
 Extensibility
 ===========================
@@ -97,5 +97,6 @@ for addition to threadlib!
 Change Log
 ===========================
 
+- 0.2: Metric threads
 - 0.1: Initial release supporting BSP parallel thread
 

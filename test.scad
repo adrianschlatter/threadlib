@@ -10,14 +10,15 @@ use <threadlib/threadlib.scad>
 
 echo ("threadlib version: ", __THREADLIB_VERSION());
 
-type = "G1";
+type = "M12x0.5";
 turns = 5;
 Douter = thread_specs(str(type, "-int"))[2] * 1.2;
 
+echo(thread_specs(str(type, "-ext")));
 intersection() {
     color("Green")
-        translate([-100, 0, -100])
-            cube(200, 200, 200);
+        translate([-1000, 0, -1000])
+            cube(2000, 2000, 2000);
     union() {
         bolt(type, turns);
         nut(type, turns, Douter);
