@@ -1,4 +1,4 @@
-.. image:: docs/nutNbolt.png
+.. image:: docs/imgs/nutNbolt.png
         :width: 20%
         :alt: bolt-in-nut logo
 
@@ -37,7 +37,7 @@ To create a bolt (without head) with 5 turns of M4 thread:
 
         bolt("M4", turns=5);
 
-.. image:: docs/bolt-M4.png
+.. image:: docs/imgs/bolt-M4.png
         :width: 30%
         :alt: Bolt with M4 thread
 
@@ -47,7 +47,7 @@ A nut:
 
         nut("M12x0.5", turns=10, Douter=40);
 
-.. image:: docs/nut-M12x0.5.png
+.. image:: docs/imgs/nut-M12x0.5.png
         :width: 30%
         :alt: M12x0.5 nut
 
