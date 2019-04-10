@@ -1,3 +1,7 @@
+.. image:: docs/nutNbolt.png
+        :width: 20%
+        :alt: bolt-in-nut logo
+
 threadlib
 +++++++++++++++++++++++++++
 
@@ -27,11 +31,15 @@ inside the ranges allowed by the norms.
 Usage
 ===========================
 
-To create a bolt (without head) with 10 turns of M12 thread:
+To create a bolt (without head) with 5 turns of M4 thread:
 
 .. code-block:: OpenSCAD
 
-        bolt("M12x0.5", turns=10);
+        bolt("M4", turns=5);
+
+.. image:: docs/bolt-M4.png
+        :width: 30%
+        :alt: Bolt with M4 thread
 
 A nut:
 
@@ -39,8 +47,12 @@ A nut:
 
         nut("M12x0.5", turns=10, Douter=40);
 
+.. image:: docs/nut-M12x0.5.png
+        :width: 30%
+        :alt: M12x0.5 nut
+
 Note that for a nut you also have to specify an outer diameter. The inner
-diameter is implicitly given by the thread designator ("G1" in this case).
+diameter is implicitly given by the thread designator ("M12x0.5" in this case).
 
 If you only need the threads alone:
 
