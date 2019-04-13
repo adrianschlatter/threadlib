@@ -9,7 +9,7 @@ Create threads easily.
 :License: 3-Clause BSD. See LICENSE.
 */
 
-function __THREADLIB_VERSION() = 0.1;
+function __THREADLIB_VERSION() = 0.2;
 
 use <thread_profile.scad>
 include <THREAD_TABLE.scad>
