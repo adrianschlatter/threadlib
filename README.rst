@@ -1,7 +1,8 @@
 .. image:: docs/imgs/logo.png
         :alt: bolt-in-nut logo
 
-threadlib is a library of standard threads for OpenSCAD. It is based on Helges
+threadlib is a library of standard threads for `OpenSCAD
+<https://www.openscad.org>`__. It is based on Helges
 excellent `threadprofile.scad
 <https://github.com/MisterHW/IoP-satellite/tree/master/OpenSCAD%20bottle%20threads>`__
 to create nice threads with lead-in / lead-out tapers. Check out his `article on
@@ -9,9 +10,13 @@ generating nice threads
 <https://hackaday.io/page/5252-generating-nice-threads-in-openscad>`__ on
 Hackaday.
 
-In contrast to other thread libraries, threadlib does not make you look up
-diameters and pitches and maybe even thread-profiles in tables and norms: It has
-these tables built in.
+In contrast to other thread libraries such as `openscad-threads
+<http://dkprojects.net/openscad-threads/>`__, `yet another thread library
+<https://www.thingiverse.com/thing:2277141>`__, 'threads for screws and nuts V1
+<https://www.thingiverse.com/thing:3131126>`__, and `threading.scad
+<https://www.thingiverse.com/thing:1659079>`__, threadlib does not make you look
+up diameters and pitches and maybe even thread-profiles in tables and norms: It
+has these tables built in.
 
 Creating a thread is as simple as
 
@@ -75,7 +80,7 @@ To create a bolt (without head) with 5 turns of M4 thread:
 .. image:: docs/imgs/bolt-M4.png
         :alt: Bolt with M4 thread
 
-See these nice lead-in / lead-outs? Try a nut (this time using the default
+See these nice lead-in / lead-out tapers? Try a nut (this time using the default
 argument for higbee_arc):
 
 .. code-block:: OpenSCAD
@@ -154,6 +159,7 @@ for addition to threadlib!
 Change Log
 ===========================
 
-- 0.2: Metric threads, PCO-1881
-- 0.1: Initial release supporting BSP parallel thread
+- 0.2: `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+- 0.1: Initial release supporting `BSP parallel thread
+  <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
 
