@@ -37,7 +37,7 @@ To create a bolt (without head) with 5 turns of M4 thread:
         :width: 30%
         :alt: Bolt with M4 thread
 
-A nut:
+See these nice lead-in / lead-outs? Try a nut:
 
 .. code-block:: OpenSCAD
 
