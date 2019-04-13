@@ -1,22 +1,18 @@
 .. image:: docs/imgs/logo.png
         :alt: bolt-in-nut logo
 
-threadlib is a library of standard threads for `OpenSCAD
-<https://www.openscad.org>`__. It is based on Helges
-excellent `threadprofile.scad
-<https://github.com/MisterHW/IoP-satellite/tree/master/OpenSCAD%20bottle%20threads>`__
-to create nice threads with lead-in / lead-out tapers. Check out his `article on
-generating nice threads
-<https://hackaday.io/page/5252-generating-nice-threads-in-openscad>`__ on
-Hackaday.
+threadlib is a library of standard threads for `OpenSCAD <https://www.openscad.org>`__.
+It is based on Helges excellent
+`threadprofile.scad <https://github.com/MisterHW/IoP-satellite/tree/master/OpenSCAD%20bottle%20threads>`__
+to create nice threads with lead-in / lead-out tapers. Check out his `article on generating nice threads <https://hackaday.io/page/5252-generating-nice-threads-in-openscad>`__
+on Hackaday.
 
-In contrast to other thread libraries such as `openscad-threads
-<http://dkprojects.net/openscad-threads/>`__, `yet another thread library
-<https://www.thingiverse.com/thing:2277141>`__, `threads for screws and nuts V1
-<https://www.thingiverse.com/thing:3131126>`__, and `threading.scad
-<https://www.thingiverse.com/thing:1659079>`__, threadlib does not make you look
-up diameters and pitches and maybe even thread-profiles in tables and norms: It
-has these tables built in.
+In contrast to other thread libraries such as `openscad-threads <http://dkprojects.net/openscad-threads/>`__,
+`yet another thread library <https://www.thingiverse.com/thing:2277141>`__,
+`threads for screws and nuts V1 <https://www.thingiverse.com/thing:3131126>`__,
+and `threading.scad <https://www.thingiverse.com/thing:1659079>`__,
+threadlib does not make you look up diameters and pitches and maybe even
+thread-profiles in tables and norms: It has these tables built in.
 
 Creating a thread is as simple as
 
@@ -31,7 +27,7 @@ Creating a thread is as simple as
 to create a British Standard Pipe parallel external thread. 
 
 
-===========================
+==================================
 Why you may want to use threadlib
 ==================================
 
@@ -54,11 +50,9 @@ Prerequisits:
 
 - `scad-utils <https://github.com/openscad/scad-utils>`__
 - `list-comprehension <https://github.com/openscad/list-comprehension-demos>`__
-- `threadprofile.scad
-  <https://github.com/MisterHW/IoP-satellite/blob/master/OpenSCAD%20bottle%20threads/thread_profile.scad>`__
+- `threadprofile.scad <https://github.com/MisterHW/IoP-satellite/blob/master/OpenSCAD%20bottle%20threads/thread_profile.scad>`__
   
-Save all of these into your OpenSCAD `library folder
-  <https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries>`__
+Save all of these into your OpenSCAD `library folder <https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries>`__
 
 threadlib:
 
@@ -154,6 +148,5 @@ Change Log
 ===========================
 
 - 0.2: `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
-- 0.1: Initial release supporting `BSP parallel thread
-  <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
+- 0.1: Initial release supporting `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
 
