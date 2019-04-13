@@ -12,7 +12,7 @@ Hackaday.
 
 In contrast to other thread libraries such as `openscad-threads
 <http://dkprojects.net/openscad-threads/>`__, `yet another thread library
-<https://www.thingiverse.com/thing:2277141>`__, 'threads for screws and nuts V1
+<https://www.thingiverse.com/thing:2277141>`__, `threads for screws and nuts V1
 <https://www.thingiverse.com/thing:3131126>`__, and `threading.scad
 <https://www.thingiverse.com/thing:1659079>`__, threadlib does not make you look
 up diameters and pitches and maybe even thread-profiles in tables and norms: It
@@ -31,6 +31,7 @@ Creating a thread is as simple as
 to create a British Standard Pipe parallel external thread. 
 
 
+===========================
 Why you may want to use threadlib
 ==================================
 
@@ -40,14 +41,12 @@ Why you may want to use threadlib
 - creates working threads (clearances are left for production tolerances)
 - flexible:
   - choose the $fn you need to fit the rest of your design
-  - let threadlib tell you the thread specs so you can do with them what *you*
-    want
+  - let threadlib tell you the thread specs so you can do with them what *you* want
 - extensible: Add your own threads
 - tried and tested in the real world: Um no, not yet. But with your help, it
   will soon be.
 
 
-===========================
 Installation
 ===========================
 
@@ -63,11 +62,9 @@ Save all of these into your OpenSCAD `library folder
 
 threadlib:
 
-  - clone threadlib into the folder 'threadlib' inside your OpenSCAD library
-  folder
+Clone threadlib into the folder 'threadlib' inside your OpenSCAD library folder
 
 
-===========================
 Usage
 ===========================
 
@@ -121,18 +118,16 @@ Here, we have used the function thread_specs(...) to look up the threads
 specifications - including the recommended diameter of the support structure.
 
 
-===========================
 List of supported threads
 ===========================
 
 Currently, threadlib knows these threads:
 
-- Metric threads (coarse, fine, and super-fine pitches) M0.25 to M600
-- British Standard Pipe Parallel Threads G1/16 to G6
-- PCO-1881 (PET-bottle thread)
+- `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__ (coarse, fine, and super-fine pitches) M0.25 to M600
+- `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__ G1/16 to G6
+- `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__ (PET-bottle thread)
 
 
-===========================
 Extensibility
 ===========================
 
@@ -155,7 +150,6 @@ accomplished and get the fame you deserve: Send in your tried and tested threads
 for addition to threadlib!
 
 
-===========================
 Change Log
 ===========================
 
