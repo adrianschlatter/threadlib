@@ -1,53 +1,98 @@
-threadlib
-+++++++++++++++++++++++++++
+.. image:: docs/imgs/logo.png
+        :alt: bolt-in-nut logo
 
-threadlib is a library of standard threads for OpenSCAD. It is based on Helges
-excellent `threadprofile.scad
-<https://github.com/MisterHW/IoP-satellite/tree/master/OpenSCAD%20bottle%20threads>`__
-to create nice threads with lead-in / lead-out tapers. Check out his `article on
-generating nice threads
-<https://hackaday.io/page/5252-generating-nice-threads-in-openscad>`__ on
-Hackaday.
+threadlib is a library of standard threads for `OpenSCAD <https://www.openscad.org>`__.
+It is based on Helges excellent
+`threadprofile.scad <https://github.com/MisterHW/IoP-satellite/tree/master/OpenSCAD%20bottle%20threads>`__
+to create nice threads with lead-in / lead-out tapers. Check out his `article on generating nice threads <https://hackaday.io/page/5252-generating-nice-threads-in-openscad>`__
+on Hackaday.
 
-In contrast to other thread libraries, threadlib does not make you look up
-diameters and pitches and maybe even thread-profiles in tables and norms: It has
-these tables built in.
+In contrast to other thread libraries such as `openscad-threads <http://dkprojects.net/openscad-threads/>`__,
+`yet another thread library <https://www.thingiverse.com/thing:2277141>`__,
+`threads for screws and nuts V1 <https://www.thingiverse.com/thing:3131126>`__,
+and `threading.scad <https://www.thingiverse.com/thing:1659079>`__,
+threadlib does not make you look up diameters and pitches and maybe even
+thread-profiles in tables and norms: It has these tables built in.
 
 Creating a thread is as simple as
 
 .. code-block:: OpenSCAD
 
-        thread("G1/2-ext", turns=10, higbee_arc=20);
+        use <threadlib/threadlib.scad>
+        thread("G1/2-ext", turns=10);
 
-to create a British Standard Pipe parallel external thread. Furthermore,
-threadlib allows for production tolerances by choosing thread dimensions well
-inside the ranges allowed by the norms.
+.. image:: docs/imgs/thread-G1o2-ext-10turns.png
+        :alt: bolt-in-nut logo
+
+to create a British Standard Pipe parallel external thread. 
+
+
+==================================
+Why you may want to use threadlib
+==================================
+
+- really easy to use
+- creates nice threads
+- configurable higbee arc
+- creates working threads (clearances are left for production tolerances)
+- flexible:
+  - choose the $fn you need to fit the rest of your design
+  - let threadlib tell you the thread specs so you can do with them what *you* want
+- extensible: Add your own threads
+- tried and tested in the real world: Um no, not yet. But with your help, it
+  will soon be.
+
+
+Installation
+===========================
+
+Prerequisits:
+
+- `scad-utils <https://github.com/openscad/scad-utils>`__
+- `list-comprehension <https://github.com/openscad/list-comprehension-demos>`__
+- `threadprofile.scad <https://github.com/MisterHW/IoP-satellite/blob/master/OpenSCAD%20bottle%20threads/thread_profile.scad>`__
+  
+Save all of these into your OpenSCAD `library folder <https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries>`__
+
+threadlib:
+
+Clone threadlib into the folder 'threadlib' inside your OpenSCAD library folder
 
 
 Usage
 ===========================
 
-To create a bolt (without head) with 10 turns of G1-inch thread:
+To create a bolt (without head) with 5 turns of M4 thread:
 
 .. code-block:: OpenSCAD
 
-        bolt("G1", turns=10);
+        bolt("M4", turns=5, higbee_arc=30);
 
-A nut:
+.. image:: docs/imgs/bolt-M4.png
+        :alt: Bolt with M4 thread
+
+See these nice lead-in / lead-out tapers? Try a nut (this time using the default
+argument for higbee_arc):
 
 .. code-block:: OpenSCAD
 
-        nut("G1", turns=10, Douter=40);
+        nut("M12x0.5", turns=10, Douter=16);
+
+.. image:: docs/imgs/nut-M12x0.5.png
+        :alt: M12x0.5 nut
 
 Note that for a nut you also have to specify an outer diameter. The inner
-diameter is implicitly given by the thread designator ("G1" in this case).
+diameter is implicitly given by the thread designator ("M12x0.5" in this case).
 
 If you only need the threads alone:
 
 .. code-block:: OpenSCAD
 
-        thread("G2 1/2-ext", turns=5);
+        thread("G1/2-ext", turns=5);
 
+.. image:: docs/imgs/thread-G1o2-ext.png
+        :alt: G1/2 external thread
+ 
 Then, add the support you want. In the simplest case, a cylinder (which is what
 nut(...) uses):
 
@@ -60,6 +105,9 @@ nut(...) uses):
         translate([0, 0, -P / 2])
             cylinder(h=H, d=Dsupport, $fn=120);
 
+.. image:: docs/imgs/flexible.png
+        :alt: G1/2 bolt
+
 Here, we have used the function thread_specs(...) to look up the threads
 specifications - including the recommended diameter of the support structure.
 
@@ -69,7 +117,9 @@ List of supported threads
 
 Currently, threadlib knows these threads:
 
-- British Standard Pipe Parallel Threadss G1/16 to G6
+- `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__ (coarse, fine, and super-fine pitches) M0.25 to M600
+- `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__ G1/16 to G6
+- `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__ (PET-bottle thread)
 
 
 Extensibility
@@ -97,5 +147,6 @@ for addition to threadlib!
 Change Log
 ===========================
 
-- 0.1: Initial release supporting BSP parallel thread
+- 0.2: `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+- 0.1: Initial release supporting `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
 
