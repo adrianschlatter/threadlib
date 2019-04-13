@@ -1,8 +1,5 @@
-.. image:: docs/imgs/nutNbolt.png
+.. image:: docs/imgs/logo.png
         :alt: bolt-in-nut logo
-
-threadlib
-+++++++++++++++++++++++++++
 
 threadlib is a library of standard threads for OpenSCAD. It is based on Helges
 excellent `threadprofile.scad
