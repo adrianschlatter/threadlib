@@ -17,6 +17,7 @@ Creating a thread is as simple as
 
 .. code-block:: OpenSCAD
 
+        use <threadlib/threadlib.scad>
         thread("G1/2-ext", turns=10);
 
 .. image:: docs/imgs/thread-G1o2-ext-10turns.png
@@ -39,6 +40,26 @@ Why you may want to use threadlib
 - extensible: Add your own threads
 - tried and tested in the real world: Um no, not yet. But with your help, it
   will soon be.
+
+
+===========================
+Installation
+===========================
+
+Prerequisits:
+
+- `scad-utils <https://github.com/openscad/scad-utils>`__
+- `list-comprehension <https://github.com/openscad/list-comprehension-demos>`__
+- `threadprofile.scad
+  <https://github.com/MisterHW/IoP-satellite/blob/master/OpenSCAD%20bottle%20threads/thread_profile.scad>`__
+  
+Save all of these into your OpenSCAD `library folder
+  <https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries>`__
+
+threadlib:
+
+  - clone threadlib into the folder 'threadlib' inside your OpenSCAD library
+  folder
 
 
 ===========================
