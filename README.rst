@@ -17,13 +17,31 @@ Creating a thread is as simple as
 
 .. code-block:: OpenSCAD
 
-        thread("G1/2-ext", turns=10, higbee_arc=20);
+        thread("G1/2-ext", turns=10);
 
-to create a British Standard Pipe parallel external thread. Furthermore,
-threadlib allows for production tolerances by choosing thread dimensions well
-inside the ranges allowed by the norms.
+.. image:: docs/imgs/thread-G1o2-ext-10turns.png
+        :alt: bolt-in-nut logo
+
+to create a British Standard Pipe parallel external thread. 
 
 
+Why you may want to use threadlib
+==================================
+
+- really easy to use
+- creates nice threads
+- configurable higbee arc
+- creates working threads (clearances are left for production tolerances)
+- flexible:
+  - choose the $fn you need to fit the rest of your design
+  - let threadlib tell you the thread specs so you can do with them what *you*
+    want
+- extensible: Add your own threads
+- tried and tested in the real world: Um no, not yet. But with your help, it
+  will soon be.
+
+
+===========================
 Usage
 ===========================
 
@@ -31,20 +49,19 @@ To create a bolt (without head) with 5 turns of M4 thread:
 
 .. code-block:: OpenSCAD
 
-        bolt("M4", turns=5);
+        bolt("M4", turns=5, higbee_arc=30);
 
 .. image:: docs/imgs/bolt-M4.png
-        :width: 30%
         :alt: Bolt with M4 thread
 
-See these nice lead-in / lead-outs? Try a nut:
+See these nice lead-in / lead-outs? Try a nut (this time using the default
+argument for higbee_arc):
 
 .. code-block:: OpenSCAD
 
-        nut("M12x0.5", turns=10, Douter=40);
+        nut("M12x0.5", turns=10, Douter=16);
 
 .. image:: docs/imgs/nut-M12x0.5.png
-        :width: 30%
         :alt: M12x0.5 nut
 
 Note that for a nut you also have to specify an outer diameter. The inner
@@ -54,8 +71,11 @@ If you only need the threads alone:
 
 .. code-block:: OpenSCAD
 
-        thread("G2 1/2-ext", turns=5);
+        thread("G1/2-ext", turns=5);
 
+.. image:: docs/imgs/thread-G1o2-ext.png
+        :alt: G1/2 external thread
+ 
 Then, add the support you want. In the simplest case, a cylinder (which is what
 nut(...) uses):
 
@@ -68,18 +88,25 @@ nut(...) uses):
         translate([0, 0, -P / 2])
             cylinder(h=H, d=Dsupport, $fn=120);
 
+.. image:: docs/imgs/flexible.png
+        :alt: G1/2 bolt
+
 Here, we have used the function thread_specs(...) to look up the threads
 specifications - including the recommended diameter of the support structure.
 
 
+===========================
 List of supported threads
 ===========================
 
 Currently, threadlib knows these threads:
 
-- British Standard Pipe Parallel Threads G1/16 to G6
 - Metric threads (coarse, fine, and super-fine pitches) M0.25 to M600
+- British Standard Pipe Parallel Threads G1/16 to G6
+- PCO-1881 (PET-bottle thread)
 
+
+===========================
 Extensibility
 ===========================
 
@@ -102,9 +129,10 @@ accomplished and get the fame you deserve: Send in your tried and tested threads
 for addition to threadlib!
 
 
+===========================
 Change Log
 ===========================
 
-- 0.2: Metric threads
+- 0.2: Metric threads, PCO-1881
 - 0.1: Initial release supporting BSP parallel thread
 
