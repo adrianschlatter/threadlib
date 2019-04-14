@@ -58,8 +58,8 @@ BEGIN	{
 	parse();
 	m1 = slope(v3, v0) / deg;
 	m2 = slope(v1, v2) / deg;
-	if (m1 > 60 + dphi || m1 < 60 - dphi \
-	    || m2 < -60 - dphi || m2 > -60 + dphi)
+	if (m1 > -60 + dphi || m1 < -60 - dphi \
+	    || m2 < 60 - dphi || m2 > 60 + dphi)
 		print designator " FAIL: " m1 ", " m2 " deg";
 	test_horizontal();
 	tested = 1;
@@ -82,8 +82,34 @@ BEGIN	{
 	parse();
 	m1 = slope(v3, v0) / deg;
 	m2 = slope(v1, v2) / deg;
-	if (m1 > 62.5 + dphi || m1 < 62.5 - dphi \
-	    || m2 < -62.5 - dphi || m2 > -62.5 + dphi)
+	if (m1 > -62.5 + dphi || m1 < -62.5 - dphi \
+	    || m2 < 62.5 - dphi || m2 > 62.5 + dphi)
+		print designator " FAIL: " m1 ", " m2 " deg";
+	test_horizontal();
+	tested = 1;
+}
+
+/PCO.+-ext/ { 
+	# PCO-1881 threads have slopes of -80 deg (on the load side) and 70 deg
+	# (on the other side) + horizontal crest / valley
+	parse();
+	m1 = slope(v0, v3) / deg;
+	m2 = slope(v2, v1) / deg;
+	if (m1 > 70 + dphi || m1 < 70 - dphi \
+	    || m2 < -80 - dphi || m2 > -80 + dphi)
+		print designator " FAIL: " m1 ", " m2 " deg";
+	test_horizontal();
+	tested = 1;
+}
+
+/PCO.+-int/ { 
+	# PCO-1881 threads have slopes of 80 deg (on the load side) and -70 deg
+	# (on the other side) + horizontal crest / valley
+	parse();
+	m1 = slope(v3, v0) / deg;
+	m2 = slope(v1, v2) / deg;
+	if (m1 > -70 + dphi || m1 < -70 - dphi \
+	    || m2 < 80 - dphi || m2 > 80 + dphi)
 		print designator " FAIL: " m1 ", " m2 " deg";
 	test_horizontal();
 	tested = 1;
@@ -97,3 +123,4 @@ BEGIN	{
 		print designator " FAIL: not tested";
 	};
 }
+
