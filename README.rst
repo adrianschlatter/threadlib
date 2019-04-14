@@ -27,7 +27,6 @@ Creating a thread is as simple as
 to create a British Standard Pipe parallel external thread. 
 
 
-==================================
 Why you may want to use threadlib
 ==================================
 
@@ -36,6 +35,7 @@ Why you may want to use threadlib
 - configurable higbee arc
 - creates working threads (clearances are left for production tolerances)
 - flexible:
+
   - choose the $fn you need to fit the rest of your design
   - let threadlib tell you the thread specs so you can do with them what *you* want
 - extensible: Add your own threads
