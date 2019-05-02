@@ -36,10 +36,12 @@ BEGIN	{
 	FS = ","; 
 	pi = atan2(0, -1);
 	deg = pi / 180;
-	dphi = 0.001;
+	dphi = 0.1;
 
 	PASS = 1;
-	}
+	NR_OF_TESTS = 0;
+	NR_OF_THREADS = 0;
+}
 
 { 	# first match-all rule: set state to untested
 	tested = 0;
@@ -57,6 +59,7 @@ BEGIN	{
 		print designator " FAIL: Rsupport < Rrot";
 		PASS = 0;
 	}
+	NR_OF_TESTS += 2;
 }
 
 /"[^,]+-int/ {
@@ -71,6 +74,7 @@ BEGIN	{
 		print designator " FAIL: Rsupport > Rrot";
 		PASS = 0;
 	}
+	NR_OF_TESTS += 2;
 }
 
 /M[0-9.x-]+-ext/ {
@@ -85,6 +89,7 @@ BEGIN	{
 	};
 	test_horizontal();
 	tested = 1;
+	NR_OF_TESTS += 2;
 }
 	
 /M[0-9.x-]+-int/ { 
@@ -99,6 +104,7 @@ BEGIN	{
 	}
 	test_horizontal();
 	tested = 1;
+	NR_OF_TESTS += 2;
 }
 
 /G.+-ext/ { 
@@ -113,6 +119,7 @@ BEGIN	{
 	}
 	test_horizontal();
 	tested = 1;
+	NR_OF_TESTS += 2;
 }
 	
 /G.+-int/ { 
@@ -127,6 +134,7 @@ BEGIN	{
 	}
 	test_horizontal();
 	tested = 1;
+	NR_OF_TESTS += 2;
 }
 
 /PCO.+-ext/ { 
@@ -142,6 +150,7 @@ BEGIN	{
 	}
 	test_horizontal();
 	tested = 1;
+	NR_OF_TESTS += 2;
 }
 
 /PCO.+-int/ { 
@@ -157,9 +166,10 @@ BEGIN	{
 	}
 	test_horizontal();
 	tested = 1;
+	NR_OF_TESTS += 2;
 }
 
-/"[^,]+-(int|ext)"/ {
+/[^,]+-(int|ext)/ {
 	# final match-all (designators) rule: test wether all lines have been
 	# tested
 	if (tested == 0) {
@@ -167,9 +177,11 @@ BEGIN	{
 		print designator " FAIL: not tested";
 		PASS = 0;
 	};
+	NR_OF_THREADS += 1;
 }
 
 END {
+	print "Ran " NR_OF_TESTS " tests on " NR_OF_THREADS " threads";
 	if (PASS == 1) print "TESTS SUCCESSFUL"
 	else print "TESTS FAIL";
 }
