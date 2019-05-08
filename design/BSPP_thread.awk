@@ -13,12 +13,12 @@ function calculateThreadlibSpecs() {
 	DPitchExt = DPitch + $10 / 2;
 	DMinInt = DMin + $14 / 2;
 	DMaxExt = DMax + $15 / 2;
+	DSupportExt = DPitchExt - 2 * 5 / 12 * H;
+	DSupportInt = DPitchInt + 2 * 5 / 12 * H;
+	DValleyExt = DPitchExt - 2 * 5 / 12 * H * qOverlap;
+	DValleyInt = DPitchInt + 2 * 5 / 12 * H * qOverlap;
 	DCrestExt = DMaxExt - tan((pi + phi) / 4) / 6 * (1 - sin(phi / 2));
 	DCrestInt = DMinInt + tan((pi + phi) / 4) / 6 * (1 - sin(phi / 2));
-	DValleyExt = DPitchExt - 5 * P / (12 * tan(phi / 2)) * qOverlap;
-	DValleyInt = DPitchInt + 5 * P / (12 * tan(phi / 2)) * qOverlap;
-	DSupportExt = DPitchExt - 5 * P / (12 * tan(phi / 2));
-	DSupportInt = DPitchInt + 5 * P / (12 * tan(phi / 2));
 	ZValley = 0.03125 * P;
 	ZCrestExt = (DPitchExt + H - DCrestExt) / 2 * tan(phi / 2);
 	ZCrestInt = (DCrestInt - DPitchInt + H) / 2 * tan(phi / 2);
