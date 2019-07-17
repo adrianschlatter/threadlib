@@ -143,6 +143,20 @@ Care to share? Safe others from repeating the valuable work you have already
 accomplished and get the fame you deserve: Send in your tried and tested threads
 for addition to threadlib!
 
+Metric Threads for FDM
+===========================
+
+
+The library is extended with a set of threads for FDM. After 3D printing chase the threads with metric taps and dies. 
+
+
+Eg. 
+	bolt("M10-FDM", turns=10);
+will produce a bolt, with the same pitch and diameter as a regular M10 bolt, but with the thread flanks at 45 degree with the vertical.  To remove the excess material, chase the thread with a `metric tap and die <https://www.google.com/search?q=metric+tap+die+set&tbm=shop>`. 
+
+.. image:: docs/imgs/FDM-thread-compared.png
+Image of official ISO thread in yellow, FDM-printable thread in grey.
+
 
 Change Log
 ===========================
