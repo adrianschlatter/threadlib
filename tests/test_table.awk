@@ -37,6 +37,7 @@ BEGIN	{
 	pi = atan2(0, -1);
 	deg = pi / 180;
 	dphi = 0.1;
+	dx = 0.001;
 
 	PASS = 1;
 	NR_OF_TESTS = 0;
@@ -60,6 +61,7 @@ BEGIN	{
 		PASS = 0;
 	}
 	NR_OF_TESTS += 2;
+	NR_OF_THREADS += 1;
 }
 
 /"[^,]+-int/ {
@@ -75,6 +77,7 @@ BEGIN	{
 		PASS = 0;
 	}
 	NR_OF_TESTS += 2;
+	NR_OF_THREADS += 1;
 }
 
 /M[0-9.x-]+-ext/ {
@@ -169,15 +172,36 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 
-/[^,]+-(int|ext)/ {
-	# final match-all (designators) rule: test wether all lines have been
-	# tested
-	if (tested == 0) {
-		parse();
-		print designator " FAIL: not tested";
+/PCF.+-ext/ { 
+	# PCF-33P-1 threads have slopes of -80 deg (on the load side) and 60 deg
+	# (on the other side) + horizontal crest / valley
+	parse();
+	m1 = slope(v0, v3) / deg;
+	m2 = slope(v2, v1) / deg;
+	if (m1 > 60 + dphi || m1 < 60 - dphi \
+	    || m2 < -80 - dphi || m2 > -80 + dphi) {
+		print designator " FAIL: " m1 ", " m2 " deg";
 		PASS = 0;
-	};
-	NR_OF_THREADS += 1;
+	}
+	test_horizontal();
+	tested = 1;
+	NR_OF_TESTS += 2;
+}
+
+/PCF.+-int/ { 
+	# PCF-33P-1 threads have slopes of 80 deg (on the load side) and -60 deg
+	# (on the other side) + horizontal crest / valley
+	parse();
+	m1 = slope(v3, v0) / deg;
+	m2 = slope(v1, v2) / deg;
+	if (m1 > -60 + dphi || m1 < -60 - dphi \
+	    || m2 < 80 - dphi || m2 > 80 + dphi) {
+		print designator " FAIL: " m1 ", " m2 " deg";
+		PASS = 0;
+	}
+	test_horizontal();
+	tested = 1;
+	NR_OF_TESTS += 2;
 }
 
 END {
