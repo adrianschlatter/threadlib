@@ -77,8 +77,8 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 
-/M[0-9.x-]+-ext/ {
-	# ext M threads have +/-60 deg slopes, horizontal crest / valley
+/((M[0-9.x-]+)|(UN([CF]|EF)[\/\#0-9-]+)|([0-9]+-UN-[\/\#0-9-]+))ext/ {
+	# ext M, UN*, and *-UN threads have +/-60 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v0, v3) / deg;
 	m2 = slope(v2, v1) / deg;
@@ -91,9 +91,9 @@ BEGIN	{
 	tested = 1;
 	NR_OF_TESTS += 2;
 }
-	
-/M[0-9.x-]+-int/ { 
-	# int M threads have +/-60 deg slopes, horizontal crest / valley
+
+/((M[0-9.x-]+)|(UN([CF]|EF)[\/\#0-9-]+)|([0-9]+-UN-[\/\#0-9-]+))int/ {
+	# int M, UN*, and *-UN threads have +/-60 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v3, v0) / deg;
 	m2 = slope(v1, v2) / deg;
