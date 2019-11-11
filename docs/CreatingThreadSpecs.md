@@ -126,12 +126,12 @@ The former is simple: We aim for the center. The latter requires a little math: 
 
 ## Adding Specs to threadlib
 
-To get the threads into threadlib, we currently do the following (attention: will change in the near future to avoid Excel file): 
+To get the threads into threadlib, we currently do the following: 
 
-- Add worksheet with original thread specs to design/threads.xlsx
-- Extend table in worksheet THREAD_TABLE (calculate threadlib specs from your original specs)
-- Save THREAD_TABLE worksheet as THREAD_TABLE.csv
-- Do `cat THREAD_TABLE.csv | awk -f design/autogenerate.awk > THREAD_TABLE.scad` in a terminal
+- Add csv-file with original thread specs in design (e.g., "newthreads.csv")
+- Write an awk script (e.g., design/newthreads.awk) that translates this .csv file to tabular threadlib specs
+- Modify Makefile: Add a line like "cat design/newthreads.csv | awk -f design/newthreads.awk >> design/THREAD_TABLE.csv")
+- design/autogenerate.awk will translate the resulting THREAD_TABLE.csv into the final THREAD_TABLE.scad (same as the .csv but with added quoting and bracketing).
 
-Furthermore, we should extend tests/test_table.awk to test our newly created threads. The very minimum is to add a test for the thread angles. Perform the tests by running `make` inside the tests subdirectory. If it prints "TESTS SUCCESSFUL" you are probably fine. Note: If you have a thread spec that is not tested at all, the tests will fail, too.
+Furthermore, we should extend tests/test_table.awk to test our newly created threads. The very minimum is to add a test for the thread angles. Perform the tests by running 'make test' in the top-level directory or 'make' inside the tests subdirectory. If it prints "TESTS SUCCESSFUL" you are probably fine. Note: If you have a thread spec that is not tested at all, the tests will fail, too.
 
