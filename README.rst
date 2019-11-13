@@ -39,8 +39,9 @@ Why you may want to use threadlib
   - choose the $fn you need to fit the rest of your design
   - let threadlib tell you the thread specs so you can do with them what *you* want
 - extensible: Add your own threads
-- tried and tested in the real world: Um no, not yet. But with your help, it
-  will soon be.
+- tried and tested in the real world: Well, partly. Given the sheer number of
+  threads, this is only possible with *your* help! Any feedback regarding working
+  (or not working) threadlib-threads is appreciated.
 
 
 Installation
@@ -61,6 +62,10 @@ Clone threadlib into the folder 'threadlib' inside your OpenSCAD library folder
 
 Usage
 ===========================
+
+Before you start: threadlib is designed in millimeters (not meters, not inches).
+Make sure that your units are set accordingly or scale the output of threadlib
+to match the units you use in your project!
 
 To create a bolt (without head) with 5 turns of M4 thread:
 
@@ -147,6 +152,9 @@ for addition to threadlib!
 Change Log
 ===========================
 
+- 0.3: Unified Inch Screw Threads (UNC, UNF, UNEF, 4-UN, 6-UN, 8-UN, 12-UN,
+  16-UN, 20-UN, 28-UN, and 32-UN. Fixed problem with PCO-1881-int. Fixed problem
+  with G-ext threads . New build system. 
 - 0.2: `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
 - 0.1: Initial release supporting `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
 
