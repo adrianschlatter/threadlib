@@ -33,23 +33,33 @@ module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE)
         pitch=P);
 }
 
-module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+function addIntExt(designator, ext) = (len(search("-ext",designator)) > 0 || len(search("-int",designator)) > 0)? str(designator) : str(designator, ext);
+
+module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) 
+{
+    name = addIntExt(designator, "-ext");
     union() {
-        specs = thread_specs(str(designator, "-ext"), table=table);
+        specs = thread_specs(name, table=table);
+      echo("specs for ",addIntExt(designator, "-int")," ",specs); 
+        //specs = thread_specs(str(designator, "-ext"), table=table);
         P = specs[0]; Dsupport = specs[2];
         H = (turns + 1) * P;
-        thread(str(designator, "-ext"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        thread(name, turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
         translate([0, 0, -P / 2])
             cylinder(h=H, d=Dsupport, $fn=fn);
     };
 };
 
 module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+    name = addIntExt(designator, "-ext");
     union() {
-        specs = thread_specs(str(designator, "-int"), table=table);
+        //specs = thread_specs(str(designator, "-int"), table=table);
+        specs = thread_specs(name, table=table);
+       
+      echo("specs for ",addIntExt(designator, "-int")," ",specs); 
         P = specs[0]; Dsupport = specs[2];
         H = (turns + 1) * P;        
-        thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        thread(name, turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
 
         translate([0, 0, -P / 2])
             difference() {
@@ -58,4 +68,3 @@ module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE)
                     cylinder(h=H+0.2, d=Dsupport, $fn=fn);
             };
     };
-};
