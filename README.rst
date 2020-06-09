@@ -25,6 +25,7 @@ Creating a thread is as simple as
         :alt: bolt-in-nut logo
 
 to create a British Standard Pipe parallel external thread. 
+G1/2 is the name of the thread type, metrical would be e.g. M4, -ext or -int specifies if you want the external version of the thread, or the internal, CAREFUL to omit those specifiers when using the nut or bolt module!
 
 
 Why you may want to use threadlib
