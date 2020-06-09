@@ -68,11 +68,12 @@ Before you start: threadlib is designed in millimeters (not meters, not inches).
 Make sure that your units are set accordingly or scale the output of threadlib
 to match the units you use in your project!
 
-To create a bolt (without head) with 5 turns of M4 thread:
+To create a bolt (without head) with 5 turns (or of length 5mm) of M4 thread:
 
 .. code-block:: OpenSCAD
 
         bolt("M4", turns=5, higbee_arc=30);
+        bolt("M4", l=5, higbee_arc=30);
 
 .. image:: docs/imgs/bolt-M4.png
         :alt: Bolt with M4 thread
@@ -83,6 +84,7 @@ argument for higbee_arc):
 .. code-block:: OpenSCAD
 
         nut("M12x0.5", turns=10, Douter=16);
+        nut("M12x0.5", l=5, Douter=16);
 
 .. image:: docs/imgs/nut-M12x0.5.png
         :alt: M12x0.5 nut
