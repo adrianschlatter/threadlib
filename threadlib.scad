@@ -53,14 +53,14 @@ module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE)
 function sanitize(designator) = let (match =(len(search("-ext",designator)) > 0 ) ? search("-ext",designator) :  (len(search("-int",designator)) > 0)?  search("-int",designator) : [])  (len(match) > 0) ?  substr(designator, 0, match[0]) : designator;
 
 
-module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) 
+module bolt(designator, turns = 5, higbee_arc=20, fn=120, table=THREAD_TABLE, h = -1) 
 {
     name = str(sanitize(designator), "-ext");
     union() {
         specs = thread_specs(name, table=table);
         P = specs[0]; Dsupport = specs[2];
-        H = (turns + 1) * P;
-        thread(name, turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        H = (h >0)? h: (turns + 1) * P;
+        thread(name, turns=(h >0)?H/P-1:turns, higbee_arc=higbee_arc, fn=fn, table=table);
         translate([0, 0, -P / 2])
             cylinder(h=H, d=Dsupport, $fn=fn);
     };
