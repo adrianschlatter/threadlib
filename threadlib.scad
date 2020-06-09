@@ -17,6 +17,11 @@ use <BOSL2/strings.scad>
 
 include <THREAD_TABLE.scad>
 
+//table is organized as follow:
+//["thread name", [pitch,//distance crete a crete
+                   // Rrot,             //internanl radius thread
+                   //Dsupport,          //diameter bolt ?? same as Rrot, no?
+                   //[[r0, z0], [r1, z1], ..., [rn, zn]]]] //radius, zpos to draw shape of teeth
 
 bolt("M4", turns = 5, higbee_arc = 30);
 translate([15,0,0]) bolt("G1/2-ext",turns = 5, higbee_arc = 30);
@@ -66,7 +71,7 @@ module bolt(designator, turns = 5, higbee_arc=20, fn=120, table=THREAD_TABLE, h 
     };
 };
 
-module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE) 
+module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE, h = -1) 
 {
     name = str(sanitize(designator), "-int");
     union() 
@@ -74,8 +79,8 @@ module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE)
         specs = thread_specs(name, table=table);
        
         P = specs[0]; Dsupport = specs[2];
-        H = (turns + 1) * P;        
-        thread(name, turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        H = (h >0)? h: (turns + 1) * P;
+        thread(name, turns=(h >0)?H/P-1:turns, higbee_arc=higbee_arc, fn=fn, table=table);
 
         translate([0, 0, -P / 2])
             difference() {
