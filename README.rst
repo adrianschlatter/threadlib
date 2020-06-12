@@ -61,12 +61,13 @@ Clone threadlib into the folder 'threadlib' inside your OpenSCAD library folder
 
 Your libraries folder should now look similar to this:
 
-libraries
-├── list-comprehension-demos/
-├── scad-utils/
-├── thread_profile.scad
-└── threadlib/
+::
 
+    libraries
+    ├── list-comprehension-demos/
+    ├── scad-utils/
+    ├── thread_profile.scad
+    └── threadlib/
 
 Usage
 ===========================
