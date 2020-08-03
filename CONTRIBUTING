@@ -1,0 +1,13 @@
+# How to contribute
+
+
+## Branching Model
+
+We follow ["A successful Git branching model"](https://nvie.com/posts/a-successful-git-branching-model).
+
+
+## Pull Requests
+
+- go into develop branch
+- unit tests must pass
+- clean history (squash noisy commits)
