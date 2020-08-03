@@ -4,7 +4,7 @@ threadlib
 
 Create threads easily.
 
-:Author: Adrian Schlatter
+:Author: Adrian Schlatter and contributors
 :Date: 2019-11-11
 :License: 3-Clause BSD. See LICENSE.
 */
@@ -62,3 +62,17 @@ module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE)
             };
     };
 };
+
+module tap(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+    difference() {
+        specs = thread_specs(str(designator, "-int"), table=table);
+        P = specs[0]; Dsupport = specs[2];
+        H = (turns + 1) * P;        
+
+        translate([0, 0, -P / 2]) {
+            cylinder(h=H, d=Dsupport, $fn=fn);
+        };
+        
+        thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+    };
+}
