@@ -4,7 +4,7 @@ threadlib
 
 Create threads easily.
 
-:Author: Adrian Schlatter
+:Author: Adrian Schlatter and contributors
 :Date: 2019-11-11
 :License: 3-Clause BSD. See LICENSE.
 */
