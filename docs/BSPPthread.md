@@ -15,9 +15,7 @@ Steps:
 - The valleys of the actual part will be defined by the support (see above). The valleys of the profile are chosen to overlap somewhat with the support => DValleyExt, DValleyInt (these correspond to Rrot).
 
 
-However, this is not yet what we need. As we do not want the rounding in the profile, we have to adjust the "crest" diameters of the straightened profile accordingly. Again, the criterion is to define create a profile that strictly remains on its own side of the parting line.
-
-![Formula to calculate r_crest](https://quicklatex.com/cache3/38/ql_000121f710d4df1820cd5937b27b7838_l3.png)
+However, this is not yet what we need. As we do not want the rounding in the profile, we have to adjust the "crest" diameters of the straightened profile accordingly. Again, the criterion is to create a profile that strictly remains on its own side of the parting line.
 
 ![The 4 points of the thread profile in OpenSCADs x-y plane](imgs/ThreadProfile.png)
 

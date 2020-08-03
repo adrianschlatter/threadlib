@@ -98,6 +98,32 @@ argument for higbee_arc):
 Note that for a nut you also have to specify an outer diameter. The inner
 diameter is implicitly given by the thread designator ("M12x0.5" in this case).
 
+To make a threaded hole (e.g. in a plate), an intuitive approach would be to
+create the difference of the plate and a bolt. However, this part would not work
+well in practice: You need a little space around the bolt to avoid collisions.
+threadlib's solution is to provide the tap module:
+
+.. code-block:: OpenSCAD
+
+        tap("G1/2", turns=5);
+
+.. image:: docs/imgs/tap-G1o2.png
+        :alt: G1/2 tap
+
+The tap shown above *is* intended for use like this and has accounted for the
+allowances needed in practice. Also, it will create the tapers:
+
+.. code-block:: OpenSCAD
+
+   difference() {
+        part_to_be_tapped_here();
+        tap("G1/2", turns=5);
+   }
+
+Make sure that the tap extends a tiny bit out of the part to be tapped.
+Otherwise, you will end up with infinitely thin artifacts covering the entrance
+of your tapped hole.
+
 If you only need the threads alone:
 
 .. code-block:: OpenSCAD
@@ -107,8 +133,9 @@ If you only need the threads alone:
 .. image:: docs/imgs/thread-G1o2-ext.png
         :alt: G1/2 external thread
  
-Then, add the support you want. In the simplest case, a cylinder (which is what
-nut(...) uses):
+(Note: You need to specify whether you want internal ("-int") or external
+("-ext") thread here.) Then, add the support you want. In the simplest
+case, a cylinder (which is what nut(...) uses):
 
 .. code-block:: OpenSCAD
 

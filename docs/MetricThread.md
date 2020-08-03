@@ -1,6 +1,6 @@
 # Metric Thread
 
-![Metric thread specs](http://mdmetric.com/tech/din13pix.jpg)
+![Metric thread specs](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/ISO_and_UTS_Thread_Dimensions.svg/2560px-ISO_and_UTS_Thread_Dimensions.svg.png)
 
 metric_thread.csv provides the numbers given in the norm (no thinking done there, just copying). metric_thread.awk - as usual - calculates the threadlib specs. 
 
