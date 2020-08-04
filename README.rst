@@ -158,11 +158,15 @@ List of supported threads
 
 Currently, threadlib knows these threads:
 
-- `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__ (coarse, fine, and super-fine pitches) M0.25 to M600
+- Metric threads (coarse, fine, and super-fine pitches) M0.25 to M600.
 - Unified Inch Screw Threads (UNC, UNF, UNEF, 4-UN, 6-UN, 8-UN, 12-UN,
   16-UN, 20-UN, 28-UN, and 32-UN). All threads are class 2 threads.
-- `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__ G1/16 to G6
-- `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__ (PET-bottle thread)
+- `BSP parallel thread
+  <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
+  G1/16 to G6. All threads are class A threads.
+- `PCO-1881
+  <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+  (PET-bottle thread)
 
 
 Extensibility
@@ -193,6 +197,6 @@ Change Log
 - 0.3: Unified Inch Screw Threads (UNC, UNF, UNEF, 4-UN, 6-UN, 8-UN, 12-UN,
   16-UN, 20-UN, 28-UN, and 32-UN. Fixed problem with PCO-1881-int. Fixed problem
   with G-ext threads . New build system. 
-- 0.2: `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+- 0.2: Metric threads, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
 - 0.1: Initial release supporting `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
 
