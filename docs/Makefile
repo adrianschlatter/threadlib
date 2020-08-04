@@ -1,6 +1,6 @@
 os = /usr/local/bin/openscad
 opts =
-imgs = bolt-M4.png nut-M12x0.5.png nutNbolt.png thread-G1o2-ext.png thread-G1o2-ext-10turns.png flexible.png
+imgs = bolt-M4.png nut-M12x0.5.png nutNbolt.png thread-G1o2-ext.png thread-G1o2-ext-10turns.png flexible.png tap.png
 
 .PHONY: all
 all: $(imgs)
@@ -21,7 +21,11 @@ thread-G1o2-ext.png: thread.scad
 	$(os) $(opts) --D 'type="G1/2-ext"' --D 'turns=5' --D 'higbee_arc=20' --camera=-0.7,-0.6,3.4,75,0,110,57 --imgsize=2048,2048 --projection=ortho -o $@ $<
 
 flexible.png: flexible.scad
-	$(os) $(opts) --D 'type="G1/2-ext"' --D 'turns=5' --D 'higbee_arc=20' --camera=-0.7,-0.6,3.4,75,0,110,57 --imgsize=2048,2048 --projection=ortho -o $@ $<$
+	$(os) $(opts) --D 'type="G1/2-ext"' --D 'turns=5' --D 'higbee_arc=20' --camera=-0.7,-0.6,3.4,75,0,110,57 --imgsize=2048,2048 --projection=ortho -o $@ $<
+
+tap.png: tap.scad
+	$(os) $(opts) --D 'type="G1/2"' --D 'turns=5' --D 'higbee_arc=20' --camera=7,15.3,3.45,87,0,333,65 --imgsize=2048,2048 --projection=ortho -o $@ $<
+
 
 .PHONY: clean
 clean:

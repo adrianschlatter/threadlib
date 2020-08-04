@@ -6,15 +6,15 @@ In the following, we explain how a thread spec (i.e., an entry in THREAD_TABLE) 
 ## Thread Basics
 
 
-To do this, we use British Standard Pipe parallel (BSPP) thread as an example (see drawing below). The bold curve shows the parting line between internal and external thread. In an ideal world, both threads are created according to the parting line. The parting line of BSP thread is based on a fundamental triangle with a 55-degree angle rounded to a radius r.
+To do this, we use British Standard Pipe parallel (BSPP) thread as an example (see drawing below). The black curve shows the parting line between internal and external thread. In an ideal world, both threads are created according to the parting line. The parting line of BSP thread is based on a fundamental triangle with a 55-degree angle rounded to a radius r.
 
-![BSPP thread drawing](http://mdmetric.com/tech/55deg228.gif) 
+![BSPP thread drawing](imgs/BSPthread.jpg)
 
      BSPP thread drawing. Source: Maryland Metrics.
 
 Reality is a bit more complicated: If one of the threads deviates only a little in the wrong direction, the threads collide. Therefore, the pitch radius r_pitch (radius where distance between falling and rising edges is exactly P/2) of the external thread has to be reduced a little bit (and vice versa for the internal thread). Also, major and minor radii are adjusted so that the real thread is guaranteed to remain on its own side of the theoretical parting line.
 
-Of course, it is not ok to introduce arbitrarily large allowances: The norm (BS EN ISO 228-1: 2003 in this case) gives the necessary constraints. Quoting [Maryland Metrics thread data charts for BSP thread](http://mdmetric.com/tech/thddat7.htm): 
+Of course, it is not ok to introduce arbitrarily large allowances: The norm (BS EN ISO 228-1: 2003 in this case) gives the necessary constraints. Quoting Maryland Metrics thread data charts for BSP thread (which used to be [here](http://mdmetric.com/tech/thddat7.htm)): 
 
 <table>
  <tr>
@@ -108,10 +108,8 @@ Of course, it is not ok to introduce arbitrarily large allowances: The norm (BS 
 
 ## Deriving threadlib Specs
 
-To simplify the thread profile, we want to avoid the rounding and replace it by a trapezoidal edge as shown in here (red: internal, blue external thread): 
+To simplify the thread profile, we want to avoid the rounding and replace it by a trapezoidal edge as shown in the image above in red and blue (internal and external thread, respectively).
 
-![threadlib profile compared to BSP parting line](imgs/BSPthread.jpg)
- 
 It is clear that we have to match the pitch as accurately as possible.  Therefore, threadlibs P is equal to the pitch in the norm (for G1/16: 0.907 mm).
 
 Then, we choose the pitch diameter to be in the center of the given tolerance range. For G1/16 this is (7.723 + 0.107/2) mm. 
