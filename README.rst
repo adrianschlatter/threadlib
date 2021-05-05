@@ -139,7 +139,7 @@ case, a cylinder (which is what nut(...) uses):
 
 .. code-block:: OpenSCAD
 
-        specs = thread_specs("G2 1/2-ext");
+        specs = thread_specs("G1/2-ext");
         P = specs[0]; Rrot = specs[1]; Dsupport = specs[2];
         section_profile = specs[3];
         H = (5 + 1) * P;
