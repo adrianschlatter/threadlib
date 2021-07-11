@@ -33,6 +33,7 @@ module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE)
         higbee_arc=higbee_arc,
         r=Rrotation,
         turns=turns,
+        fn=fn,
         pitch=P);
 }
 
