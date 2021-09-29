@@ -14,6 +14,8 @@ function __THREADLIB_VERSION() = 0.3;
 use <thread_profile.scad>
 include <THREAD_TABLE.scad>
 
+bolt("M6", turns=6, tol=1);
+
 function thread_specs(designator, table=THREAD_TABLE) =
     /* Returns thread specs of thread-type 'designator' as a vector of
        [pitch, Rrotation, Dsupport, section_profile] */
@@ -24,56 +26,54 @@ function thread_specs(designator, table=THREAD_TABLE) =
         // verify that we found something and return it:
         assert(!is_undef(specs), str("Designator: '", designator, "' not found")) specs;
 
-module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE)
+module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0)
 {
     specs = thread_specs(designator, table=table);
-    P = specs[0]; Rrotation = specs[1]; section_profile = specs[3];
+    P = specs[0]; Rrotation = specs[1]-tol; section_profile = specs[3];
     straight_thread(
         section_profile=section_profile,
         higbee_arc=higbee_arc,
         r=Rrotation,
         turns=turns,
-        fn=fn,
-        pitch=P);
+        pitch=P, fn=fn); // added fn for this function : smoother thread
 }
 
-module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0) {
     union() {
         specs = thread_specs(str(designator, "-ext"), table=table);
         P = specs[0]; Dsupport = specs[2];
         H = (turns + 1) * P;
-        thread(str(designator, "-ext"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        thread(str(designator, "-ext"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table, tol=tol);
         translate([0, 0, -P / 2])
-            cylinder(h=H, d=Dsupport, $fn=fn);
+            cylinder(h=H, d=Dsupport-2*tol, $fn=fn);
     };
 };
 
-module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0.0) {
     union() {
         specs = thread_specs(str(designator, "-int"), table=table);
-        P = specs[0]; Dsupport = specs[2];
+        P = specs[0]; Dsupport = specs[2] + tol;
         H = (turns + 1) * P;        
-        thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table, tol=tol);
 
         translate([0, 0, -P / 2])
             difference() {
                 cylinder(h=H, d=Douter, $fn=fn);
                 translate([0, 0, -0.1])
-                    cylinder(h=H+0.2, d=Dsupport, $fn=fn);
+                    cylinder(h=H+0.2, d=Dsupport+tol, $fn=fn);
             };
     };
 };
 
-module tap(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) {
+module tap(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0.0) {
     difference() {
         specs = thread_specs(str(designator, "-int"), table=table);
         P = specs[0]; Dsupport = specs[2];
-        H = (turns + 1) * P;        
-
+        H = (turns + 1) * P;
         translate([0, 0, -P / 2]) {
-            cylinder(h=H, d=Dsupport, $fn=fn);
+            cylinder(h=H, d=Dsupport+2*tol, $fn=fn);
         };
         
-        thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
+        thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table, tol=tol);
     };
 }
