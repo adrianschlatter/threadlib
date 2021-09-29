@@ -14,7 +14,7 @@ function __THREADLIB_VERSION() = 0.3;
 use <thread_profile.scad>
 include <THREAD_TABLE.scad>
 
-bolt("M6", turns=6, tol=1);
+bolt("M6", height=2.8, tol=0);
 
 function thread_specs(designator, table=THREAD_TABLE) =
     /* Returns thread specs of thread-type 'designator' as a vector of
@@ -38,10 +38,11 @@ module thread(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=
         pitch=P, fn=fn); // added fn for this function : smoother thread
 }
 
-module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0) {
+module bolt(designator, turns, height=0, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0) {
     union() {
         specs = thread_specs(str(designator, "-ext"), table=table);
         P = specs[0]; Dsupport = specs[2];
+		turns=turns?turns:height/P;
         H = (turns + 1) * P;
         thread(str(designator, "-ext"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table, tol=tol);
         translate([0, 0, -P / 2])
@@ -49,10 +50,11 @@ module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0)
     };
 };
 
-module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0.0) {
+module nut(designator, turns, height=0, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0.0) {
     union() {
         specs = thread_specs(str(designator, "-int"), table=table);
         P = specs[0]; Dsupport = specs[2] + tol;
+		turns=turns?turns:height/P;
         H = (turns + 1) * P;        
         thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table, tol=tol);
 
@@ -65,10 +67,11 @@ module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE,
     };
 };
 
-module tap(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0.0) {
+module tap(designator, turns, height=0, higbee_arc=20, fn=120, table=THREAD_TABLE, tol=0.0) {
     difference() {
         specs = thread_specs(str(designator, "-int"), table=table);
         P = specs[0]; Dsupport = specs[2];
+		turns=turns?turns:height/P;
         H = (turns + 1) * P;
         translate([0, 0, -P / 2]) {
             cylinder(h=H, d=Dsupport+2*tol, $fn=fn);
