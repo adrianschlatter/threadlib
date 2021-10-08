@@ -194,6 +194,7 @@ for addition to threadlib!
 Change Log
 ===========================
 
+- 0.3.x: List metric threads under short designator and full designator
 - 0.3: Unified Inch Screw Threads (UNC, UNF, UNEF, 4-UN, 6-UN, 8-UN, 12-UN,
   16-UN, 20-UN, 28-UN, and 32-UN. Fixed problem with PCO-1881-int. Fixed problem
   with G-ext threads . New build system. 
