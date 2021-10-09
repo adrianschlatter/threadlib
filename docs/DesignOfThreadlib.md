@@ -46,7 +46,7 @@ Why do we need P, Rrot, Dsup, *and* profile? Can we not include everything in pr
 
 *lilo-tapers*: To make the tapers, the profile is scaled-down at the ends. We need to know where the profile is scaled to (center of scaling). We solve this by specifying the radius of rotation for extrusion Rrot explicitly and subtract it from profile (profile holds [dr, z] instead of [r, z]). lilo-tapers are then created by scaling towards dr=0.
 
-*Overlap 1*: We could include P in profile by requiring that profile extends over exactly one period (i.e., P). However, this would result in a helix where neighbouring periods would exactly touch each other. This leads to rendering artifacts => P is stored seperately and profile is *required* to cover *less* than a period. 
+*Overlap 1*: We could include P in profile by requiring that profile extends over exactly one period (i.e., P). However, this would result in a helix where neighboring periods would exactly touch each other. This leads to rendering artifacts => P is stored separately and profile is *required* to cover *less* than a period. 
 
 *Overlap 2*: But hey! Dsup = 2 * Rrot, no? In principle yes, but in that case thread and bolt would *just* touch => rendering problems. But we could implicitly assume that Rrot is simply 1% smaller than Dsup / 2 for external threads (and 1% larger for internal threads)! Yes, we could. But we decided to make that choice explicit rather than implicit.
 

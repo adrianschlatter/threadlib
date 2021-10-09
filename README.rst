@@ -69,6 +69,7 @@ Your libraries folder should now look similar to this:
     ├── thread_profile.scad
     └── threadlib/
 
+
 Usage
 ===========================
 
@@ -188,7 +189,10 @@ add your own:
 
 Care to share? Safe others from repeating the valuable work you have already
 accomplished and get the fame you deserve: Send in your tried and tested threads
-for addition to threadlib!
+for addition to threadlib! See `Design of Threadlib <./docs/DesignOfThreadlib.md>`_
+for help on how to hack your own thread as shown above and
+`Creating Thread Specs <./docs/CreatingThreadSpecs.md>`_ for an introduction on how
+to contribute entire thread classes to threadlib.
 
 
 Change Log
