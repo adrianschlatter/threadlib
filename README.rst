@@ -195,6 +195,14 @@ for help on how to hack your own thread as shown above and
 to contribute entire thread classes to threadlib.
 
 
+Still reading?
+===========================
+
+If you read this far, you're probably not here for the first time. If you
+use and like threadlib, would you consider giving it a Github Star? (The
+button is at the top of this website.)
+
+
 Change Log
 ===========================
 
