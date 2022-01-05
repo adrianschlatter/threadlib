@@ -73,14 +73,17 @@ BEGIN {
 	printf	Designator "-ext,"			# designator such as "M4-ext"
 	printExternalThreadSpecs();
 
-	printf	DesignatorLong "-ext,"		# designator such as "M4x0.7-ext"
-	printExternalThreadSpecs();
-
+	if (DesignatorLong != Designator) {
+		printf	DesignatorLong "-ext,"	# designator such as "M4x0.7-ext"
+		printExternalThreadSpecs();
+	}
 
 	# Internal thread:
 	printf	Designator "-int,"			# designator such as "M4-int"
 	printInternalThreadSpecs();
 
-	printf	DesignatorLong "-int,"		# designator such as "M4x0.7-int"
-	printInternalThreadSpecs();
+	if (DesignatorLong != Designator) {
+		printf	DesignatorLong "-int,"	# designator such as "M4x0.7-int"
+		printInternalThreadSpecs();
+	}
 }
