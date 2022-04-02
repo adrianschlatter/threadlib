@@ -137,7 +137,37 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 
-/PCO.+-ext/ { 
+/PCO-1810-ext/ { 
+	# PCO-1810 threads have +/-70 deg slopes, horizontal crest / valley
+	parse();
+	m1 = slope(v0, v3) / deg;
+	m2 = slope(v2, v1) / deg;
+	if (m1 > 70 + dphi || m1 < 70 - dphi \
+	    || m2 < -70 - dphi || m2 > -70 + dphi) {
+		print designator " FAIL: " m1 ", " m2 " deg";
+		PASS = 0;
+	}
+	test_horizontal();
+	tested = 1;
+	NR_OF_TESTS += 2;
+}
+
+/PCO-1810-int/ { 
+	# PCO-1810 threads have +/-70 deg slopes, horizontal crest / valley
+	parse();
+	m1 = slope(v3, v0) / deg;
+	m2 = slope(v1, v2) / deg;
+	if (m1 > -70 + dphi || m1 < -70 - dphi \
+	    || m2 < 70 - dphi || m2 > 70 + dphi) {
+		print designator " FAIL: " m1 ", " m2 " deg";
+		PASS = 0;
+	}
+	test_horizontal();
+	tested = 1;
+	NR_OF_TESTS += 2;
+}
+
+/PCO-1881-ext/ { 
 	# PCO-1881 threads have slopes of -80 deg (on the load side) and 70 deg
 	# (on the other side) + horizontal crest / valley
 	parse();
@@ -153,7 +183,7 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 
-/PCO.+-int/ { 
+/PCO-1881-int/ { 
 	# PCO-1881 threads have slopes of 80 deg (on the load side) and -70 deg
 	# (on the other side) + horizontal crest / valley
 	parse();
