@@ -18,7 +18,7 @@ echo(thread_specs(str(type, "-ext")));
 intersection() {
     color("Green")
         translate([-1000, 0, -1000])
-            cube(2000, 2000, 2000);
+            cube(2000);
     union() {
         bolt(type, turns);
         nut(type, turns, Douter);

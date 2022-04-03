@@ -8,6 +8,9 @@ function min(x, y) {
 }
 
 function calculateThreadlibSpecs() {
+	# Calculates threadlib specs for UIS threads assuming class 2
+	# threads (class 1 and class 3 threads are not supported)
+
 	Designator = $1;
 	TPI = $2;
 	D = $3;

@@ -59,6 +59,16 @@ threadlib:
 
 Clone threadlib into the folder 'threadlib' inside your OpenSCAD library folder
 
+Your libraries folder should now look similar to this:
+
+::
+
+    libraries
+    ├── list-comprehension-demos/
+    ├── scad-utils/
+    ├── thread_profile.scad
+    └── threadlib/
+
 
 Usage
 ===========================
@@ -89,6 +99,32 @@ argument for higbee_arc):
 Note that for a nut you also have to specify an outer diameter. The inner
 diameter is implicitly given by the thread designator ("M12x0.5" in this case).
 
+To make a threaded hole (e.g. in a plate), an intuitive approach would be to
+create the difference of the plate and a bolt. However, this part would not work
+well in practice: You need a little space around the bolt to avoid collisions.
+threadlib's solution is to provide the tap module:
+
+.. code-block:: OpenSCAD
+
+        tap("G1/2", turns=5);
+
+.. image:: docs/imgs/tap-G1o2.png
+        :alt: G1/2 tap
+
+The tap shown above *is* intended for use like this and has accounted for the
+allowances needed in practice. Also, it will create the tapers:
+
+.. code-block:: OpenSCAD
+
+   difference() {
+        part_to_be_tapped_here();
+        tap("G1/2", turns=5);
+   }
+
+Make sure that the tap extends a tiny bit out of the part to be tapped.
+Otherwise, you will end up with infinitely thin artifacts covering the entrance
+of your tapped hole.
+
 If you only need the threads alone:
 
 .. code-block:: OpenSCAD
@@ -98,12 +134,13 @@ If you only need the threads alone:
 .. image:: docs/imgs/thread-G1o2-ext.png
         :alt: G1/2 external thread
  
-Then, add the support you want. In the simplest case, a cylinder (which is what
-nut(...) uses):
+(Note: You need to specify whether you want internal ("-int") or external
+("-ext") thread here.) Then, add the support you want. In the simplest
+case, a cylinder (which is what nut(...) uses):
 
 .. code-block:: OpenSCAD
 
-        specs = thread_specs("G2 1/2-ext");
+        specs = thread_specs("G1/2-ext");
         P = specs[0]; Rrot = specs[1]; Dsupport = specs[2];
         section_profile = specs[3];
         H = (5 + 1) * P;
@@ -122,9 +159,15 @@ List of supported threads
 
 Currently, threadlib knows these threads:
 
-- `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__ (coarse, fine, and super-fine pitches) M0.25 to M600
-- `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__ G1/16 to G6
-- `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__ (PET-bottle thread)
+- Metric threads (coarse, fine, and super-fine pitches) M0.25 to M600.
+- Unified Inch Screw Threads (UNC, UNF, UNEF, 4-UN, 6-UN, 8-UN, 12-UN,
+  16-UN, 20-UN, 28-UN, and 32-UN). All threads are class 2 threads.
+- `BSP parallel thread
+  <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
+  G1/16 to G6. All threads are class A threads.
+- `PCO-1881
+  <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+  (PET-bottle thread)
 
 
 Extensibility
@@ -146,15 +189,28 @@ add your own:
 
 Care to share? Safe others from repeating the valuable work you have already
 accomplished and get the fame you deserve: Send in your tried and tested threads
-for addition to threadlib!
+for addition to threadlib! See `Design of Threadlib <./docs/DesignOfThreadlib.md>`_
+for help on how to hack your own thread as shown above and
+`Creating Thread Specs <./docs/CreatingThreadSpecs.md>`_ for an introduction on how
+to contribute entire thread classes to threadlib.
+
+
+Still reading?
+===========================
+
+If you read this far, you're probably not here for the first time. If you
+use and like threadlib, would you consider giving it a Github Star? (The
+button is at the top of this website.)
 
 
 Change Log
 ===========================
 
+- 0.4: `PCO-1810 <https://www.isbt.com/assets/Threadspecs/pco1810.pdf>`__.
+  tap module. Fixes bug with $fn in straight_thread(). Lists metric
+  threads under short designator and full designator.
 - 0.3: Unified Inch Screw Threads (UNC, UNF, UNEF, 4-UN, 6-UN, 8-UN, 12-UN,
   16-UN, 20-UN, 28-UN, and 32-UN. Fixed problem with PCO-1881-int. Fixed problem
-  with G-ext threads . New build system. 
-- 0.2: `Metric threads <http://mdmetric.com/tech/M-thead%20600.htm>`__, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+  with G-ext threads. New build system. 
+- 0.2: Metric threads, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
 - 0.1: Initial release supporting `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
-
