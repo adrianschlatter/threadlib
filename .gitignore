@@ -3,6 +3,7 @@
 
 # Editor
 .*.swp
+.vscode/
 
 # Build
 design/THREAD_TABLE.csv
@@ -15,4 +16,5 @@ renderall*.scad
 ASME*.pdf
 docs/*.png
 design/UIS.py
-
+*.afdesign
+experimental/

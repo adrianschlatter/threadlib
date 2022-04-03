@@ -206,10 +206,11 @@ button is at the top of this website.)
 Change Log
 ===========================
 
-- 0.3.x: List metric threads under short designator and full designator
+- 0.4: `PCO-1810 <https://www.isbt.com/assets/Threadspecs/pco1810.pdf>`__.
+  tap module. Fixes bug with $fn in straight_thread(). Lists metric
+  threads under short designator and full designator.
 - 0.3: Unified Inch Screw Threads (UNC, UNF, UNEF, 4-UN, 6-UN, 8-UN, 12-UN,
   16-UN, 20-UN, 28-UN, and 32-UN. Fixed problem with PCO-1881-int. Fixed problem
-  with G-ext threads . New build system. 
+  with G-ext threads. New build system. 
 - 0.2: Metric threads, `PCO-1881 <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
 - 0.1: Initial release supporting `BSP parallel thread <https://www.amesweb.info/Screws/British-Standard-Pipe-Parallel-Thread-BSPP.aspx>`__
-
