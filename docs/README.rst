@@ -1,4 +1,4 @@
-.. image:: docs/imgs/logo.png
+.. image:: imgs/logo.png
         :alt: bolt-in-nut logo
 
 threadlib is a library of standard threads for `OpenSCAD <https://www.openscad.org>`__.
@@ -21,7 +21,7 @@ Creating a thread is as simple as
         use <threadlib/threadlib.scad>
         thread("G1/2-ext", turns=10);
 
-.. image:: docs/imgs/thread-G1o2-ext-10turns.png
+.. image:: imgs/thread-G1o2-ext-10turns.png
         :alt: bolt-in-nut logo
 
 to create a British Standard Pipe parallel external thread. 
@@ -83,7 +83,7 @@ To create a bolt (without head) with 5 turns of M4 thread:
 
         bolt("M4", turns=5, higbee_arc=30);
 
-.. image:: docs/imgs/bolt-M4.png
+.. image:: imgs/bolt-M4.png
         :alt: Bolt with M4 thread
 
 See these nice lead-in / lead-out tapers? Try a nut (this time using the default
@@ -93,7 +93,7 @@ argument for higbee_arc):
 
         nut("M12x0.5", turns=10, Douter=16);
 
-.. image:: docs/imgs/nut-M12x0.5.png
+.. image:: imgs/nut-M12x0.5.png
         :alt: M12x0.5 nut
 
 Note that for a nut you also have to specify an outer diameter. The inner
@@ -108,7 +108,7 @@ threadlib's solution is to provide the tap module:
 
         tap("G1/2", turns=5);
 
-.. image:: docs/imgs/tap-G1o2.png
+.. image:: imgs/tap-G1o2.png
         :alt: G1/2 tap
 
 The tap shown above *is* intended for use like this and has accounted for the
@@ -131,7 +131,7 @@ If you only need the threads alone:
 
         thread("G1/2-ext", turns=5);
 
-.. image:: docs/imgs/thread-G1o2-ext.png
+.. image:: imgs/thread-G1o2-ext.png
         :alt: G1/2 external thread
  
 (Note: You need to specify whether you want internal ("-int") or external
@@ -147,7 +147,7 @@ case, a cylinder (which is what nut(...) uses):
         translate([0, 0, -P / 2])
             cylinder(h=H, d=Dsupport, $fn=120);
 
-.. image:: docs/imgs/flexible.png
+.. image:: imgs/flexible.png
         :alt: G1/2 bolt
 
 Here, we have used the function thread_specs(...) to look up the threads
@@ -167,7 +167,9 @@ Currently, threadlib knows these threads:
   G1/16 to G6. All threads are class A threads.
 - `PCO-1881
   <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+  and `PCO-1810 <https://www.isbt.com/assets/Threadspecs/pco1810.pdf>`__
   (PET-bottle thread)
+- Royal Microscopical Society's Thread (RMS)
 
 
 Extensibility
@@ -188,11 +190,9 @@ add your own:
         thread("special", turns=15, table=MY_THREAD_TABLE);
 
 Care to share? Safe others from repeating the valuable work you have already
-accomplished and get the fame you deserve: Send in your tried and tested threads
-for addition to threadlib! See `Design of Threadlib <./docs/DesignOfThreadlib.md>`_
-for help on how to hack your own thread as shown above and
-`Creating Thread Specs <./docs/CreatingThreadSpecs.md>`_ for an introduction on how
-to contribute entire thread classes to threadlib.
+accomplished and get the fame you deserve: Send in your tried and tested
+threads for addition to threadlib! See `How to contribute <./CONTRIBUTING.md>`_
+for help on how to become a contributor.
 
 
 Still reading?
@@ -206,6 +206,7 @@ button is at the top of this website.)
 Change Log
 ===========================
 
+- 0.5: Royal Microscopical Society's thread (RMS)
 - 0.4: `PCO-1810 <https://www.isbt.com/assets/Threadspecs/pco1810.pdf>`__.
   tap module. Fixes bug with $fn in straight_thread(). Lists metric
   threads under short designator and full designator.
