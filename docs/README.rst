@@ -169,6 +169,7 @@ Currently, threadlib knows these threads:
   <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
   and `PCO-1810 <https://www.isbt.com/assets/Threadspecs/pco1810.pdf>`__
   (PET-bottle thread)
+- Royal Microscopical Society's Thread (RMS)
 
 
 Extensibility
@@ -207,6 +208,7 @@ button is at the top of this website.)
 Change Log
 ===========================
 
+- 0.5: Royal Microscopical Society's thread (RMS)
 - 0.4: `PCO-1810 <https://www.isbt.com/assets/Threadspecs/pco1810.pdf>`__.
   tap module. Fixes bug with $fn in straight_thread(). Lists metric
   threads under short designator and full designator.
