@@ -50,10 +50,12 @@ That's what we need the most! This is how to do it:
 
 * Convert these specs for use in threadlib:
 
-  * Find help on this topic in [Design of threadlib](docs/DesignOfThreadlib.md)
-    and [Creating Thread Specs](docs/CreatingThreadSpecs.md)
+  * Find help on this topic in [Design of threadlib](DesignOfThreadlib.md)
+    and [Creating Thread Specs](CreatingThreadSpecs.md)
 
   * Use existing threads as examples. You find them in design/
+
+* Add a [unit test](UnitTests.md)
 
 * When done, proceed with a pull request (see "Did you write a patch?" above)
 
