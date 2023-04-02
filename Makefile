@@ -16,4 +16,8 @@ test:
 clean:
 	rm -f THREAD_TABLE.scad
 	rm -f design/THREAD_TABLE.csv
+	rm -f docs/img_prep/*.png
 
+.PHONY: img_prep
+img_prep:
+	@$(MAKE) -C docs/img_prep
