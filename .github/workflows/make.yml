@@ -1,0 +1,21 @@
+name: make
+
+on:
+  pull_request:
+
+jobs:
+  make_test:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Clean up
+      run: make clean
+      
+    - name: Build
+      run: make
+
+    - name: Run tests
+      run: make test
