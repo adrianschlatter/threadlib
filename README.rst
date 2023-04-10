@@ -167,6 +167,7 @@ Currently, threadlib knows these threads:
   G1/16 to G6. All threads are class A threads.
 - `PCO-1881
   <https://www.bevtech.org/assets/Committees/Packaging-Technology/20/3784253-20.pdf>`__
+  and `PCO-1810 <https://www.isbt.com/assets/Threadspecs/pco1810.pdf>`__
   (PET-bottle thread)
 
 
