@@ -5,11 +5,11 @@ threadlib
 Create threads easily.
 
 :Author: Adrian Schlatter and contributors
-:Date: 2019-11-11
+:Date: 2023-04-02
 :License: 3-Clause BSD. See LICENSE.
 */
 
-function __THREADLIB_VERSION() = 0.4;
+function __THREADLIB_VERSION() = 0.5;
 
 use <thread_profile.scad>
 include <THREAD_TABLE.scad>

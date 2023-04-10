@@ -7,14 +7,3 @@
 
 # Build
 design/THREAD_TABLE.csv
-
-# Files not intended for repository
-*.xcf
-*.xlsx
-*.stl
-renderall*.scad
-ASME*.pdf
-docs/*.png
-design/UIS.py
-*.afdesign
-experimental/

@@ -1,4 +1,4 @@
-# How to contribute to threadlib
+# How to contribute
 
 Thank for considering a contribution to threadlib! Any help is greatly
 appreciated.
@@ -50,13 +50,15 @@ That's what we need the most! This is how to do it:
 
 * Convert these specs for use in threadlib:
 
-  * Find help on this topic in [Design of threadlib](docs/DesignOfThreadlib.md)
-    and [Creating Thread Specs](docs/CreatingThreadSpecs.md)
+  * Find help on this topic in [Design of threadlib](DesignOfThreadlib.md)
+    and [Creating Thread Specs](CreatingThreadSpecs.md)
 
-  * Use existing threads as examples. You find them beneath design/
+  * Use existing threads as examples. You find them in design/
+
+* Add a [unit test](UnitTests.md)
 
 * When done, proceed with a pull request (see "Did you write a patch?" above)
-  
+
 
 ## Final remarks
 

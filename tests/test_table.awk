@@ -107,8 +107,8 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 
-/G.+-ext/ { 
-	# ext M threads have +/-62.5 deg slopes, horizontal crest / valley
+/(G.+-ext)|(RMS-ext)/ { 
+	# ext G- and RMS threads have +/-62.5 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v0, v3) / deg;
 	m2 = slope(v2, v1) / deg;
@@ -122,8 +122,8 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 	
-/G.+-int/ { 
-	# int G threads have +/-62.5 deg slopes, horizontal crest / valley
+/(G.+-int)|(RMS-int)/ { 
+	# int G- and RMS threads have +/-62.5 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v3, v0) / deg;
 	m2 = slope(v1, v2) / deg;
