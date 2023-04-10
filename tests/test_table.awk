@@ -108,7 +108,7 @@ BEGIN	{
 }
 
 /GPI-.+-ext/ { 
-	# ext M threads have +/-45 deg slopes, horizontal crest / valley
+	# ext GPI threads have  +/-63.4349 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v0, v3) / deg;
 	m2 = slope(v2, v1) / deg;
@@ -124,7 +124,7 @@ BEGIN	{
 
 # Todo - Fix this angle test for GPI
 /GPI-.+-int/ { 
-	# int G threads have +/-63.4349 deg slopes, horizontal crest / valley
+	# int GPI threads have +/-63.4349 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v3, v0) / deg;
 	m2 = slope(v1, v2) / deg;
@@ -139,7 +139,7 @@ BEGIN	{
 }
 
 
-/G[^A-Z]+-ext/ { 
+/G[^A-Z]+-ext|(RMS-ext)/ { 
 	# ext M threads have +/-62.5 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v0, v3) / deg;
@@ -154,8 +154,8 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 	
-/G[^A-Z]+-int/ { 
-	# int G threads have +/-62.5 deg slopes, horizontal crest / valley
+/(G[^A-Z]+-int)|(RMS-int)/ { 
+	# int G- and RMS threads have +/-62.5 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v3, v0) / deg;
 	m2 = slope(v1, v2) / deg;
