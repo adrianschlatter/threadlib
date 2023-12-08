@@ -97,7 +97,11 @@ argument for higbee_arc):
         :alt: M12x0.5 nut
 
 Note that for a nut you also have to specify an outer diameter. The inner
-diameter is implicitly given by the thread designator ("M12x0.5" in this case).
+diameter is implicitly given by the thread designator ("M12x0.5" in this case). You can set the number of sides for the nut! So you can make hex nuts:
+
+.. code-block:: OpenScad
+
+        nut("M30", turns=4, Douter=46, nut_sides=6); 
 
 To make a threaded hole (e.g. in a plate), an intuitive approach would be to
 create the difference of the plate and a bolt. However, this part would not work
