@@ -1,6 +1,6 @@
 # How to contribute
 
-Thank for considering a contribution to threadlib! Any help is greatly
+Thank you for considering a contribution to threadlib! Any help is greatly
 appreciated.
 
 
