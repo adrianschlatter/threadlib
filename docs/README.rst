@@ -49,7 +49,7 @@ Installation
 
 Prerequisits:
 
-- `scad-utils <https://github.com/openscad/scad-utils>`__
+- `openscad/scad-utils <https://github.com/openscad/scad-utils>`__
 - `list-comprehension <https://github.com/openscad/list-comprehension-demos>`__
 - `threadprofile.scad <https://github.com/MisterHW/IoP-satellite/blob/master/OpenSCAD%20bottle%20threads/thread_profile.scad>`__
   
