@@ -48,8 +48,8 @@ module bolt(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) {
     };
 };
 
-module nut(designator, turns, Douter, higbee_arc=20, fn=120, nut_sides=120, table=THREAD_TABLE) {
-    nut_sides = nut_sides == 120 ? fn : nut_sides;
+module nut(designator, turns, Douter, higbee_arc=20, fn=120, table=THREAD_TABLE, nut_sides=0) {
+    nut_sides = nut_sides == 0 ? fn : nut_sides;
     union() {
         specs = thread_specs(str(designator, "-int"), table=table);
         P = specs[0]; Dsupport = specs[2];
