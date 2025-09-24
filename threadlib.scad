@@ -78,3 +78,24 @@ module tap(designator, turns, higbee_arc=20, fn=120, table=THREAD_TABLE) {
         thread(str(designator, "-int"), turns=turns, higbee_arc=higbee_arc, fn=fn, table=table);
     };
 }
+
+// Height calculation
+function cal_thread_height(designator, turns, table=THREAD_TABLE) =
+    let(specs = thread_specs(designator, table=table))
+    let(P = specs[0])
+    (turns + 1) * P;
+
+function cal_bolt_height(designator, turns, table=THREAD_TABLE) =
+    let(specs = thread_specs(str(designator, "-ext"), table=table))
+    let(P = specs[0])
+    (turns + 1) * P;
+
+function cal_nut_height(designator, turns, table=THREAD_TABLE) =
+    let(specs = thread_specs(str(designator, "-int"), table=table))
+    let(P = specs[0])
+    (turns + 1) * P;
+
+function cal_tap_height(designator, turns, table=THREAD_TABLE) =
+    let(specs = thread_specs(str(designator, "-int"), table=table))
+    let(P = specs[0])
+    (turns + 1) * P;
