@@ -215,7 +215,7 @@ already or want to help fixing it? That's great! Please read `CONTRIBUTING
 <./CONTRIBUTING.md>`__ to learn how to proceed.
 
 To help ascertain that contributing to this project is a pleasant experience,
-we have established a `code of conduct <./CODE_OF_CONDUCT.md`__. You can expect
+we have established a `code of conduct <./CODE_OF_CONDUCT.md>`__. You can expect
 everyone to adhere to it, just make sure you do as well.
 
 
