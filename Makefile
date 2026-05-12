@@ -6,6 +6,7 @@ design: clean
 	cat design/PCO_thread.csv | awk -f design/PCO_thread.awk >> design/THREAD_TABLE.csv
 	cat design/UIS_thread.csv | awk -f design/UIS_thread.awk >> design/THREAD_TABLE.csv
 	cat design/microscope_thread.csv | awk -f design/microscope_thread.awk >> design/THREAD_TABLE.csv
+	cat design/PG_electrical_thread.csv | awk -f design/PG_electrical_thread.awk >> design/THREAD_TABLE.csv
 	cat design/THREAD_TABLE.csv | awk -f design/autogenerate.awk > THREAD_TABLE.scad
 
 .PHONY: test
