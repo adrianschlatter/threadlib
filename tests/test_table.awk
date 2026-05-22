@@ -107,8 +107,40 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 
-/(G.+-ext)|(RMS-ext)/ { 
-	# ext G- and RMS threads have +/-62.5 deg slopes, horizontal crest / valley
+/GPI-.+-ext/ { 
+	# ext GPI threads have  +/-63.4349 deg slopes, horizontal crest / valley
+	parse();
+	m1 = slope(v0, v3) / deg;
+	m2 = slope(v2, v1) / deg;
+	if (m1 > 63.4349 + dphi || m1 < 63.4349 - dphi \
+	    || m2 < -63.4349 - dphi || m2 > -63.4349 + dphi) {
+		print designator " FAIL: " m1 ", " m2 " deg";
+		PASS = 0;
+	}
+	test_horizontal();
+	tested = 1;
+	NR_OF_TESTS += 2;
+}
+
+# Todo - Fix this angle test for GPI
+/GPI-.+-int/ { 
+	# int GPI threads have +/-63.4349 deg slopes, horizontal crest / valley
+	parse();
+	m1 = slope(v3, v0) / deg;
+	m2 = slope(v1, v2) / deg;
+	if (m1 > -63.4349 + dphi || m1 < -63.4349 - dphi \
+	    || m2 < 63.4349 - dphi || m2 > 63.4349 + dphi) {
+		print designator " FAIL: " m1 ", " m2 " deg";
+		PASS = 0;
+	}
+	test_horizontal();
+	tested = 1;
+	NR_OF_TESTS += 2;
+}
+
+
+/G[^A-Z]+-ext|(RMS-ext)/ { 
+	# ext M threads have +/-62.5 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v0, v3) / deg;
 	m2 = slope(v2, v1) / deg;
@@ -122,7 +154,7 @@ BEGIN	{
 	NR_OF_TESTS += 2;
 }
 	
-/(G.+-int)|(RMS-int)/ { 
+/(G[^A-Z]+-int)|(RMS-int)/ { 
 	# int G- and RMS threads have +/-62.5 deg slopes, horizontal crest / valley
 	parse();
 	m1 = slope(v3, v0) / deg;
